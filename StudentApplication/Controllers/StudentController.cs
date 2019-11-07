@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using StudentApplication.BL;
+using StudentApplication.Models;
 
 namespace StudentApplication.Controllers
 {
@@ -13,7 +14,9 @@ namespace StudentApplication.Controllers
 
         public ActionResult Index()
         {
-            studentAppLogic.GetStudentData();
+            var result = studentAppLogic.GetStudentData();
+
+
             return View();
         }
     }

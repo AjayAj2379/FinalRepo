@@ -1,4 +1,5 @@
 ﻿using StudentApplication.Model;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 
@@ -8,18 +9,20 @@ namespace StudentApplication.DAL
     {
         SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString);
 
-        public object GetStudentData(string studentID)
+        public List<StudentModel> GetStudentData(string studentID)
         {
+            sqlConnection.Open();
             SqlDataReader sqlDataReader = null;
-
-            StudentModel studentModel = new StudentModel();
-            using (SqlCommand sqlCommand = new SqlCommand("Select * from Student_Table where StudentID " + studentID + "", sqlConnection))
+            List<StudentModel> studentModel = new List<StudentModel>();
+            //StudentModel studentModel = new StudentModel();
+            string query = "Select * from Student_Table where StudentID ='"+studentID+"'";
+            using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
             {
                 sqlDataReader = sqlCommand.ExecuteReader();
 
                 while (sqlDataReader.Read())
                 {
-                    studentModel = new StudentModel
+                    studentModel.Add(new StudentModel
                     {
                         studentID = sqlDataReader["StudentID"].ToString(),
                         studentName = sqlDataReader["StudentName"].ToString(),
@@ -27,14 +30,18 @@ namespace StudentApplication.DAL
                         studentCity = sqlDataReader["City"].ToString(),
                         dateofBirth = sqlDataReader["DateofBirth"].ToString(),
                         studentGender = sqlDataReader["Gender"].ToString(),
-                        Department =
-                        {
-                            departmentId = sqlDataReader["DepartmentId"].ToString()
-                        }
-                    };
+
+                        departmentID = sqlDataReader["DepartmentId"].ToString(),
+
+
+
+                    });
 
                 }
             }
+
+            var count = studentModel;
+            sqlConnection.Close();
             return studentModel;
         }
 

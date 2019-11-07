@@ -1,6 +1,7 @@
 ﻿using StudentApplication.DAL;
-
-
+using StudentApplication.Model;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace StudentApplication.BL
 {
@@ -9,9 +10,15 @@ namespace StudentApplication.BL
     {
         StudentDataService studentDataService = new StudentDataService();
 
-        public void GetStudentData()
+        public dynamic GetStudentData()
         {
-            var result = studentDataService.GetStudentData("STUD001");
+        List<StudentModel> result = studentDataService.GetStudentData("STUD001");
+
+           
+
+            
+          
+            return result;
         }
     }
 }

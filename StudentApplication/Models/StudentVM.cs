@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace StudentApplication.Model
+namespace StudentApplication.Models
 {
-    public class StudentModel
+    public class StudentVM
     {
         public string studentID { get; set; }
 
@@ -17,10 +16,6 @@ namespace StudentApplication.Model
         public string studentGender { get; set; }
 
         public string dateofBirth { get; set; }
-
-        public string studentCity { get; set; }
-
-        public string departmentID { get; set; }
 
     }
 }
