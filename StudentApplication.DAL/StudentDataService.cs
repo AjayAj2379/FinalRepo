@@ -9,13 +9,13 @@ namespace StudentApplication.DAL
     {
         SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString);
 
-        public List<StudentModel> GetStudentData(string studentID)
+        public List<StudentModel> GetStudentData()
         {
             sqlConnection.Open();
             SqlDataReader sqlDataReader = null;
             List<StudentModel> studentModel = new List<StudentModel>();
             //StudentModel studentModel = new StudentModel();
-            string query = "Select * from Student_Table where StudentID ='"+studentID+"'";
+            string query = "Select * from Student_Table";
             using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
             {
                 sqlDataReader = sqlCommand.ExecuteReader();
@@ -45,6 +45,32 @@ namespace StudentApplication.DAL
             return studentModel;
         }
 
+        public List<DepartmentModel> GetDepartmentData()
+        {
+            sqlConnection.Open();
+            SqlDataReader sqlDataReader = null;
+            List<DepartmentModel> departmentModel = new List<DepartmentModel>();
+            
+            string query = "Select * from Department_Table";
+            using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+            {
+                sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    departmentModel.Add(new DepartmentModel
+                    {
+                        departmentId = sqlDataReader["DepartmentId"].ToString(),
+                        departmentHead = sqlDataReader["DepartmentHead"].ToString(),
+                        departmentName = sqlDataReader["DepartmentName"].ToString()
+                    });
+
+                }
+            }
+
+            sqlConnection.Close();
+            return departmentModel;
+        }
 
 
     }

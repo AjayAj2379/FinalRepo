@@ -14,7 +14,7 @@ namespace StudentApplication.Controllers
 
         public ActionResult Index()
         {
-            var result = studentAppLogic.GetStudentData();
+            var result = studentAppLogic.GetStudentData("STUD001");
 
 
             return View();

@@ -10,9 +10,10 @@ namespace StudentApplication.BL
     {
         StudentDataService studentDataService = new StudentDataService();
 
-        public dynamic GetStudentData()
+        public dynamic GetStudentData(string studentID)
         {
-        List<StudentModel> result = studentDataService.GetStudentData("STUD001");
+
+        List<StudentModel> result = studentDataService.GetStudentData();
 
            
 
