@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using StudentApplication.DAL;
+
+
 
 namespace StudentApplication.BL
 {
-    public class StudentAppLogic
+    
+ public class StudentAppLogic
     {
+        StudentDataService studentDataService = new StudentDataService();
+
+        public void GetStudentData()
+        {
+            var result = studentDataService.GetStudentData("STUD001");
+        }
     }
 }
