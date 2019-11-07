@@ -40,7 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CourseModel.cs" />
     <Compile Include="DepartmentModel.cs" />
+    <Compile Include="GradeModel.cs" />
+    <Compile Include="LecturerModel.cs" />
+    <Compile Include="LibraryModel.cs" />
+    <Compile Include="SemesterModel.cs" />
     <Compile Include="StudentModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
