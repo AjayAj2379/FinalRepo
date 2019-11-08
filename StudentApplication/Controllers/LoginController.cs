@@ -19,8 +19,15 @@ namespace StudentApplication.Controllers
 
         public ActionResult Login(LoginVM loginModel)
         {
-            
-            return View();
+            if(loginModel.userName=="admin" && loginModel.password=="admin@123")
+            {
+
+            }
+            else
+            {
+                ViewBag.Message = "Enter the correct login details";
+            }
+            return View(loginModel);
         }
 
     }

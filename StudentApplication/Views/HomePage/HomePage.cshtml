@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewBag.Title = "HomePage";
+   
+}
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="w3-container">
+        <div class="row" style="margin:70px;">
+            <div class="col-md-6">
+                <div class="w3-card-4" style="width:350px">
+
+                    <img id="student" data-toggle="modal" data-target="#myModal" src="~/Images/stdLogo.png" alt="Alps" style="width:350px; height:400px;cursor:pointer">
+                    <div class="w3-container w3-center">
+                        <b>Student</b>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="w3-card-4" style="width:350px">
+                    <img id="teacher" data-toggle="modal" data-target="#mytechModal" src="~/Images/teachLogo.jpg" alt="Alps" style="width:350px; height:400px;cursor:pointer"/>
+                    
+                    <div class="w3-container w3-center">
+                        <b>Teacher</b>
+                    </div>
+                </div>
+
+            </div>
+         </div>
+        
+    </div>
+
+
+        <!--Student Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><b>Student Details</b></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group form-inline justify-content-center">
+    
+                            <input type="text" class="form-control col-lg-4" style="margin-left:30px" id="studentvalue"  placeholder="Enter the studentID">
+                            <button type="button" class="btn btn-primary" id="studentinput" style="margin-left:30px">Click</button>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!--Teacher Modal -->
+    <div class="modal fade" id="mytechModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><b>Teacher Details</b></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group form-inline justify-content-center">
+
+
+                        <input type="text" class="form-control col-lg-4" style="margin-left:30px" id="teachervalue" placeholder="Enter the TeacherID">
+                        <button type="button" class="btn btn-primary" id="teacherinput" style="margin-left:30px">Click</button>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</body>
+
+<script>
+    $(document).ready(function () {
+
+        $("#studentinput").click(function () {           
+            var val = $("#studentvalue").val();
+            console.log(val)
+            debugger;
+            $.ajax({
+                type:'GET',
+                url: "/HomePage/StudentDetails",
+                data: {value:val},  
+                success: function (data) {
+                    console.log(data);
+                    window.location.href = '/HomePage/StudentDetails';
+                },
+                failure: function (data) {
+                    console.log("error")
+                }
+                
+            })
+        });
+    });
+    </script>
+
+
