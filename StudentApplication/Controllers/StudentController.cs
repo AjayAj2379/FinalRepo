@@ -19,13 +19,12 @@ namespace StudentApplication.Controllers
 
             var config = new MapperConfiguration(cfg =>
             cfg.CreateMap<object, StudentVM>()
-
             );
-
             var mapper = config.CreateMapper();
 
             StudentVM studentVM = mapper.Map<StudentVM>(result);
             return View();
         }
+
     }
 }
