@@ -27,7 +27,7 @@ namespace StudentApplication.BL
                     departName = department.departmentName
                 }
                 );
-            
+
             return result;
         }
 
