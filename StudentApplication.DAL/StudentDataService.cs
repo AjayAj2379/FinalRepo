@@ -36,7 +36,34 @@ namespace StudentApplication.DAL
             sqlConnection.Close();
             return studentModel;
         }
+        public List<StudentModel> GetStudents()
+        {
+            sqlConnection.Open();
+            SqlDataReader sqlDataReader = null;
+            List<StudentModel> studentModel = new List<StudentModel>();
+            string query = "Select * from Student_Table";
+            using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+            {
+                sqlDataReader = sqlCommand.ExecuteReader();
 
+                while (sqlDataReader.Read())
+                {
+                    studentModel.Add(new StudentModel
+                    {
+                        studentID = sqlDataReader["StudentID"].ToString(),
+                        studentName = sqlDataReader["StudentName"].ToString(),
+                        studentEmail = sqlDataReader["Email"].ToString(),
+                        studentCity = sqlDataReader["City"].ToString(),
+                        dateofBirth = sqlDataReader["DateofBirth"].ToString(),
+                        studentGender = sqlDataReader["Gender"].ToString(),
+                        departmentID = sqlDataReader["DepartmentId"].ToString(),
+
+                    });
+                }
+            }
+            sqlConnection.Close();
+            return studentModel;
+        }
         public List<DepartmentModel> GetDepartmentData()
         {
             sqlConnection.Open();
