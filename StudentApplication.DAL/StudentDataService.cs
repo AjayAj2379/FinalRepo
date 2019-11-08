@@ -9,13 +9,13 @@ namespace StudentApplication.DAL
     {
         SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString);
 
-        public List<StudentModel> GetStudentData()
+        public List<StudentModel> GetStudentData(string studentID)
         {
             sqlConnection.Open();
             SqlDataReader sqlDataReader = null;
             List<StudentModel> studentModel = new List<StudentModel>();
             //StudentModel studentModel = new StudentModel();
-            string query = "Select * from Student_Table";
+            string query = "Select * from Student_Table where StudentID ='"+studentID+"'";
             using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
             {
                 sqlDataReader = sqlCommand.ExecuteReader();
@@ -40,7 +40,7 @@ namespace StudentApplication.DAL
                 }
             }
 
-            var count = studentModel;
+         
             sqlConnection.Close();
             return studentModel;
         }

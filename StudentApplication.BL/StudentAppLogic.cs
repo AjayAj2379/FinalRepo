@@ -10,15 +10,28 @@ namespace StudentApplication.BL
     {
         StudentDataService studentDataService = new StudentDataService();
 
-        public dynamic GetStudentData(string studentID)
+        public object GetStudentData (string studentID)
         {
+            List<StudentModel> studentList = studentDataService.GetStudentData(studentID);
 
-        List<StudentModel> result = studentDataService.GetStudentData();
+            List<DepartmentModel> departmentList = studentDataService.GetDepartmentData();
 
-           
+            var result = studentList.Join(
+                departmentList,
+                student => student.departmentID,
+                department => department.departmentId,
 
+                (student, department) => new
+                {
+                    studentID = student.studentID,
+                    studentName = student.studentName,
+                    dateofBirth = student.dateofBirth,
+                    studentEmail = student.studentEmail,
+                    studentGender = student.studentGender,
+                    departName = department.departmentName
+                }
+                );
             
-          
             return result;
         }
     }
