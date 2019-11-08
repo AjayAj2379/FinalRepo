@@ -23,16 +23,13 @@ namespace StudentApplication.BL
 
                 (student, department) => new
                 {
-                    studentID = student.studentID,
-                    studentName = student.studentName,
-                    dateofBirth = student.dateofBirth,
-                    studentEmail = student.studentEmail,
-                    studentGender = student.studentGender,
+                    student,
                     departName = department.departmentName
                 }
                 );
             
             return result;
         }
+
     }
 }
