@@ -8,6 +8,20 @@ namespace StudentApplication.Controllers
 {
     public class DepartmentController : Controller
     {
+        [HttpGet]
 
+        public ActionResult GetDepartmentDetails()
+        {
+
+            return View();
+        }
+
+        [HttpGet]
+
+        public ActionResult StaffDetailsbyDept()
+        {
+
+            return View();
+        }
     }
 }
