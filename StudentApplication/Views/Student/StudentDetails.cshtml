@@ -23,13 +23,13 @@
 </head>
 <body>
    
-    <div class="container">
+    <div class="container mt-5">
         <div class="jumbotron">
-            <div class="row">
+            <div class="row" style="margin:50px">
                 <div class="col-md-8">
                     <table class="table col-md-4 borderless" align="center">
 
-                        <tbody>
+                        <tbody class="mt-5">
                             <tr>
                                 <td><b><span>Enroll Number</span></b></td>
                                 <td><b> @Model.studentID </b></td>
@@ -63,10 +63,26 @@
                     </div>
 
                 <div class="col-md-4">
+                    <div>
+                      
+                         <div class="card" style="height:300px;width:250px">
+                            <img class="card-img-top" src="~/Images/stdLogo.png" alt="Card image" style="height:50%;width:50%">
+                            <div class="card-body">
+                                <h4 class="card-title">@Model.studentName</h4>
+                                <p class="card-text">Academic Year : 2015-2019</p>
+                                
+                            </div>
+                        </div>
 
                     </div>
                 </div>
             </div>
+            <div class="text-center">
+                <button class="btn btn-primary mr-5">Dept Details</button>
+                <button class="btn btn-primary mr-5">Course Details</button>
+                <button class="btn btn-primary mr-5">Grade Details</button>
+             </div>
+        </div>
         </div>
 
 

@@ -33,12 +33,18 @@ namespace StudentApplication.Controllers
 
             StudentVM studentVM = new StudentVM();
             string s = studentData.ToString();
-            //studentVM.studentID = studentData.student.studentID;
-            //studentVM.studentName = studentData.student.studentName;
-            //studentVM.studentEmail = studentData.student.studentEmail;
-            //studentVM.studentGender = studentData.student.studentGender;
-            //studentVM.dateofBirth = studentData.student.dateofBirth;
-            //studentVM.departmentName = studentData.departName;
+            studentVM.studentID = "stud001";
+            studentVM.studentName = "Ajay";
+            studentVM.studentEmail = "aajkjsakksa";
+            studentVM.studentGender = "M";
+            studentVM.dateofBirth = "5442561";
+            studentVM.departmentName = "stud001";
+
+            return View(studentVM);
+        }
+
+        public ActionResult CourseDetailsforStudent()
+        {
 
             return View();
         }
