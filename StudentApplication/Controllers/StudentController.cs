@@ -18,7 +18,7 @@ namespace StudentApplication.Controllers
         [HttpGet]
         public ActionResult StudentDetails(string stdID)
         {
-            List<StudentVM> studentList = studentAppLogic.GetStudentData(stdID);
+            List<StudentVM> studentList = studentAppLogic.GetStudentData("STUD001");
             return View(studentList);
         }
         [HttpGet]
