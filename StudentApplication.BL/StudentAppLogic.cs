@@ -11,13 +11,13 @@ namespace StudentApplication.BL
     {
         StudentDataService studentDataService = new StudentDataService();
 
-        public object GetStudentData (string studentID)
+        public ArrayList GetStudentData (string studentID)
         {
             List<StudentModel> studentList = studentDataService.GetStudentData(studentID);
 
             List<DepartmentModel> departmentList = studentDataService.GetDepartmentData();
 
-            object result = studentList.Join(
+            var result = studentList.Join(
                 departmentList,
                 student => student.departmentID,
                 department => department.departmentId,
@@ -28,11 +28,15 @@ namespace StudentApplication.BL
                     departName = department.departmentName
                 }
                 );
-
-            return result;
+            ArrayList list = new ArrayList();
+            foreach(var item in result)
+            {
+                list.Add(item);
+            }
+            return list;
         }
 
-        public object GetSemGrades(string studentID)
+        public ArrayList GetSemGrades(string studentID)
         {
             var gradeList = studentDataService.GetGradeData().Where(gradeDetails =>
             gradeDetails.studentId.Equals(studentID)
@@ -56,20 +60,32 @@ namespace StudentApplication.BL
                     semesterMontYear = semester.semesterMontYear
                 }
                 );
-            return result;
+                 
+            ArrayList list = new ArrayList();
+            foreach (var item in result)
+            {
+                list.Add(item);
+            }
+            return list;
         }
 
-        public object GetCourses(string semesterID)
+        public ArrayList GetCourses(string semesterID)
         {
             var courseList = studentDataService.GetCourseData().Where(semDetails =>
            semDetails.semesterId.Equals(semesterID)
            ).Select(semDetails => semDetails.courseName)
            ;
 
-            return courseList;
+             
+            ArrayList list = new ArrayList();
+            foreach (var item in courseList)
+            {
+                list.Add(item);
+            }
+            return list;
         }
 
-        public object GetTeachers(string subjectName)
+        public ArrayList GetTeachers(string subjectName)
         {
 
             var courseList = studentDataService.GetCourseData().Where(courseDetails =>
@@ -88,18 +104,31 @@ namespace StudentApplication.BL
                   lecturerName = teacher.lecturerName
               }
               );
-            return result;
+
+            ArrayList list = new ArrayList();
+            foreach (var item in courseList)
+            {
+                list.Add(item);
+            }
+            return list;
+  
         }
 
-        public object GetTeacherDetails(string lecturerId)
+        public ArrayList GetTeacherDetails(string lecturerId)
         {
             var result = studentDataService.GetLecturerData().Where(teacher =>
              teacher.lecturerId.Equals(lecturerId)
              );
-            return result;
+
+            ArrayList list = new ArrayList();
+            foreach (var item in result)
+            {
+                list.Add(item);
+            }
+            return list;
         }
 
-        public object GetStudents(string lecturerId)
+        public ArrayList GetStudents(string lecturerId)
         {
             var teacherList = studentDataService.GetLecturerData().Where(teacher =>
             teacher.lecturerId.Equals(lecturerId)
@@ -116,7 +145,40 @@ namespace StudentApplication.BL
                     students = student
                 }
                 );
-            return result;
+            ArrayList list = new ArrayList();
+            foreach (var item in result)
+            {
+                list.Add(item);
+            }
+            return list;
+        }
+
+        public ArrayList GetDepartmentDetails(string deptID)
+        {
+            var deptData = studentDataService.GetDepartmentData().Where(dept=>
+            dept.departmentId.Equals(deptID)
+                );
+
+            ArrayList list = new ArrayList();
+            foreach (var item in deptData)
+            {
+                list.Add(item);
+            }
+            return list;
+        }
+
+        public ArrayList GetCourseDetails(string deptID)
+        {
+            var courseData = studentDataService.GetCourseData().Where(course =>
+            course.departmentId.Equals(deptID)
+                );
+
+            ArrayList list = new ArrayList();
+            foreach (var item in courseData)
+            {
+                list.Add(item);
+            }
+            return list;
         }
     }
 }
