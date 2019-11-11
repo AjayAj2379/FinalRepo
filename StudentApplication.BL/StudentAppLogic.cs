@@ -1,5 +1,6 @@
 ﻿using StudentApplication.DAL;
 using StudentApplication.Model;
+using StudentApplication.Models;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,10 @@ namespace StudentApplication.BL
     {
         StudentDataService studentDataService = new StudentDataService();
 
-        public ArrayList GetStudentData (string studentID)
+        public List<StudentVM> GetStudentData (string studentID)
         {
+            StudentVM studentVM = new StudentVM();
             List<StudentModel> studentList = studentDataService.GetStudentData(studentID);
-
             List<DepartmentModel> departmentList = studentDataService.GetDepartmentData();
 
             var result = studentList.Join(
@@ -22,18 +23,18 @@ namespace StudentApplication.BL
                 student => student.departmentID,
                 department => department.departmentId,
 
-                (student, department) => new
+                (student, department) => new StudentVM
                 {
-                    student,
-                    departName = department.departmentName
+                    studentID = student.studentID,
+                    studentName = student.studentName,
+                    studentEmail = student.studentEmail,
+                    studentGender = student.studentGender,
+                    dateofBirth = student.dateofBirth,
+                    departmentName = department.departmentName
                 }
-                );
-            ArrayList list = new ArrayList();
-            foreach(var item in result)
-            {
-                list.Add(item);
-            }
-            return list;
+                ).ToList();
+          
+            return result;
         }
 
         public ArrayList GetSemGrades(string studentID)
