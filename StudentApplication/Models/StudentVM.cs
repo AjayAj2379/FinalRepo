@@ -17,5 +17,6 @@ namespace StudentApplication.Models
 
         public string dateofBirth { get; set; }
 
+        public string departmentName { get; set; }
     }
 }
