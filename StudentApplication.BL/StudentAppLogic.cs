@@ -17,7 +17,7 @@ namespace StudentApplication.BL
 
             List<DepartmentModel> departmentList = studentDataService.GetDepartmentData();
 
-            object result = studentList.Join(
+            var result = studentList.Join(
                 departmentList,
                 student => student.departmentID,
                 department => department.departmentId,
