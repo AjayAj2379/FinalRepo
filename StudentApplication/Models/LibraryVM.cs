@@ -7,9 +7,5 @@ namespace StudentApplication.Models
 {
     public class LibraryVM
     {
-        public string courseId { get; set; }
-        public string authorName { get; set; }
-        public string rackNumber { get; set; }
-        public string yearOfPublishing { get; set; }
     }
 }

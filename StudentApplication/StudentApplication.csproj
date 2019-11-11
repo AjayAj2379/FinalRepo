@@ -211,7 +211,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CourseVM.cs" />
+    <Compile Include="Models\DepartmentVM.cs" />
+    <Compile Include="Models\GradeVM.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LecturerVM.cs" />
+    <Compile Include="Models\LibraryVM.cs" />
     <Compile Include="Models\LoginVM.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\StudentVM.cs" />
