@@ -99,11 +99,11 @@
             debugger;
             $.ajax({
                 type:'GET',
-                url: "/HomePage/StudentDetails",
+                url: "/Student/StudentDetails",
                 data: {value:val},  
                 success: function (data) {
                     console.log(data);
-                    window.location.href = '/HomePage/StudentDetails';
+                    window.location.href = '/Student/StudentDetails';
                 },
                 failure: function (data) {
                     console.log("error")
