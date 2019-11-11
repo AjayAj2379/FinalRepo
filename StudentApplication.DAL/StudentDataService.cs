@@ -149,7 +149,7 @@ namespace StudentApplication.DAL
                     semesterModel.Add(new SemesterModel
                     {
                         semesterId = sqlDataReader["SemesterID"].ToString(),
-                        semesterName = sqlDataReader["SemesterNumber"].ToString(),
+                        semesterNumber=sqlDataReader["SemesterNumber"].ToString(),
                         semesterMontYear=sqlDataReader["SemesterMonth_Year"].ToString()
                     });
                 }
