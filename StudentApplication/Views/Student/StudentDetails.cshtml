@@ -1,4 +1,4 @@
-﻿@model StudentApplication.Models.StudentVM
+﻿@model IEnumerable<StudentApplication.Models.StudentVM>
 
 @{
     Layout = null;
@@ -22,68 +22,75 @@
     </style>
 </head>
 <body>
-   
-    <div class="container mt-5">
-        <div class="jumbotron">
-            <div class="row" style="margin:50px">
-                <div class="col-md-8">
-                    <table class="table col-md-4 borderless" align="center">
 
-                        <tbody class="mt-5">
-                            <tr>
-                                <td><b><span>Enroll Number</span></b></td>
-                                <td><b> @Model.studentID </b></td>
-                            </tr>
-                            <tr>
-                                <td><b><span>Student Name</span></b></td>
-                                <td><b>@Model.studentName</b></td>
-                            </tr>
-                            <tr>
-                                <td><b><span>Gender</span></b></td>
-                                <td><b> @Model.studentGender</b></td>
-                            </tr>
-                            <tr>
-                                <td><b><span>EmailID</span></b></td>
-                                <td>
-                                    <b>@Model.studentEmail </b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><b><span>Date of Birth</span></b></td>
-                                <td><b> @Model.dateofBirth </b></td>
-                            </tr>
-                            <tr>
-                                <td><b><span>Department Name</span></b></td>
-                                <td><b> @Model.departmentName</b></td>
-                            </tr>
-                           
-                        </tbody>
-                    </table>
+
+    @foreach (var item in Model)
+    {
+        <div class="container mt-5">
+            <div class="jumbotron">
+                <div class="row" style="margin:50px">
+                    <div class="col-md-8">
+                        <table class="table col-md-4 borderless" align="center">
+
+                            <tbody class="mt-5">
+                                <tr>
+                                    <td><b><span>Enroll Number</span></b></td>
+                                    <td><b> @item.studentID </b></td>
+                                </tr>
+                                <tr>
+                                    <td><b><span>Student Name</span></b></td>
+                                    <td><b>@item.studentName</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b><span>Gender</span></b></td>
+                                    <td><b> @item.studentGender</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b><span>EmailID</span></b></td>
+                                    <td>
+                                        <b>@item.studentEmail </b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b><span>Date of Birth</span></b></td>
+                                    <td><b> @item.dateofBirth </b></td>
+                                </tr>
+                                <tr>
+                                    <td><b><span>Department Name</span></b></td>
+                                    <td><b> @item.departmentName</b></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
 
                     </div>
 
-                <div class="col-md-4">
-                    <div>
-                      
-                         <div class="card" style="height:300px;width:250px">
-                            <img class="card-img-top" src="~/Images/stdLogo.png" alt="Card image" style="height:50%;width:50%">
-                            <div class="card-body">
-                                <h4 class="card-title">@Model.studentName</h4>
-                                <p class="card-text">Academic Year : 2015-2019</p>
-                                
-                            </div>
-                        </div>
+                    <div class="col-md-4">
+                        <div>
 
+                            <div class="card" style="height:300px;width:250px">
+                                <img class="card-img-top" src="~/Images/stdLogo.png" alt="Card image" style="height:50%;width:50%">
+                                <div class="card-body">
+                                    <h4 class="card-title">@item.studentName</h4>
+                                    <p class="card-text">Academic Year : 2015-2019</p>
+
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
+                <div class="text-center">
+                    <button class="btn btn-primary mr-5">Dept Details</button>
+                    <button class="btn btn-primary mr-5">Course Details</button>
+                    <button class="btn btn-primary mr-5">Grade Details</button>
+                </div>
             </div>
-            <div class="text-center">
-                <button class="btn btn-primary mr-5">Dept Details</button>
-                <button class="btn btn-primary mr-5">Course Details</button>
-                <button class="btn btn-primary mr-5">Grade Details</button>
-             </div>
         </div>
-        </div>
+
+    }
+
+
 
 
     <p>
@@ -91,4 +98,5 @@
         @Html.ActionLink("Back to List", "Index")
     </p>
 </body>
+
 </html>

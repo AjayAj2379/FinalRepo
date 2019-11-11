@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "HomePage";
-   
+
 }
 <head>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -96,14 +96,19 @@
         $("#studentinput").click(function () {           
             var val = $("#studentvalue").val();
             console.log(val)
+            
             debugger;
             $.ajax({
                 type:'GET',
                 url: "/Student/StudentDetails",
-                data: {value:val},  
+                data: { stdID: val },
                 success: function (data) {
+                    console.log("success");
                     console.log(data);
-                    window.location.href = '/Student/StudentDetails';
+                    var value = $("#studentvalue").val();
+                  
+                   location.href= '/Student/StudentDetails?stdId='+val;
+                   
                 },
                 failure: function (data) {
                     console.log("error")

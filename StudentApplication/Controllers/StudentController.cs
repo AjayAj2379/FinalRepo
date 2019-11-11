@@ -9,16 +9,11 @@ namespace StudentApplication.Controllers
     {
         StudentAppLogic studentAppLogic = new StudentAppLogic();
 
-        public ActionResult Index()
-        {
-         
-            return View();
-        }
 
         [HttpGet]
         public ActionResult StudentDetails(string stdID)
         {
-            List<StudentVM> studentList = studentAppLogic.GetStudentData("STUD001");
+            List<StudentVM> studentList = studentAppLogic.GetStudentData(stdID);
             return View(studentList);
         }
         [HttpGet]
