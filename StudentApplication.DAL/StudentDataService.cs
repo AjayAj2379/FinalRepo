@@ -8,18 +8,15 @@ namespace StudentApplication.DAL
     public class StudentDataService
     {
         SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString);
-
         public List<StudentModel> GetStudentData()
         {
             sqlConnection.Open();
             SqlDataReader sqlDataReader = null;
-            List<StudentModel> studentModel = new List<StudentModel>();
-            //StudentModel studentModel = new StudentModel();
+            List<StudentModel> studentModel = new List<StudentModel>();          
             string query = "Select * from Student_Table";
             using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
             {
-                sqlDataReader = sqlCommand.ExecuteReader();
-
+               sqlDataReader = sqlCommand.ExecuteReader();
                 while (sqlDataReader.Read())
                 {
                     studentModel.Add(new StudentModel
@@ -30,16 +27,11 @@ namespace StudentApplication.DAL
                         studentCity = sqlDataReader["City"].ToString(),
                         dateofBirth = sqlDataReader["DateofBirth"].ToString(),
                         studentGender = sqlDataReader["Gender"].ToString(),
-
                         departmentID = sqlDataReader["DepartmentId"].ToString(),
-
-
-
                     });
 
                 }
             }
-
             var count = studentModel;
             sqlConnection.Close();
             return studentModel;
@@ -49,13 +41,11 @@ namespace StudentApplication.DAL
         {
             sqlConnection.Open();
             SqlDataReader sqlDataReader = null;
-            List<DepartmentModel> departmentModel = new List<DepartmentModel>();
-            
+            List<DepartmentModel> departmentModel = new List<DepartmentModel>();            
             string query = "Select * from Department_Table";
             using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
             {
                 sqlDataReader = sqlCommand.ExecuteReader();
-
                 while (sqlDataReader.Read())
                 {
                     departmentModel.Add(new DepartmentModel

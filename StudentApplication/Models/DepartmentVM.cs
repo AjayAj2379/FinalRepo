@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace StudentApplication.Model
+namespace StudentApplication.Models
 {
-    public class DepartmentModel
+    public class DepartmentVM
     {
         public string departmentId { get; set; }
         public string departmentName { get; set; }
         public string departmentHead { get; set; }
     }
-
 }
