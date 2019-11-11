@@ -1,0 +1,90 @@
+﻿
+@model StudentApplication.Models.LecturerVM
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <title>StudentDetails</title>
+
+    <style>
+        .borderless td, .borderless th {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="jumbotron">
+            <div class="row" style="margin:50px">
+                <div class="col-md-8">
+                    <table class="table col-md-4 borderless" align="center">
+
+                        <tbody class="mt-5">
+                            <tr>
+                                <td><b><span>Enroll Number</span></b></td>
+                                <td><b> @Model.lecturerId </b></td>
+                            </tr>
+                            <tr>
+                                <td><b><span>Lecturer Name</span></b></td>
+                                <td><b>@Model.lecturerName</b></td>
+                            </tr>
+                            <tr>
+                                <td><b><span>Email Address</span></b></td>
+                                <td><b> @Model.email</b></td>
+                            </tr>
+                            <tr>
+                                <td><b><span>Phone Number</span></b></td>
+                                <td>
+                                    <b>@Model.phoneNumber </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b><span>Department Name</span></b></td>
+                                <td><b> @Model.departmentName</b></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="col-md-4">
+                    <div>
+
+                        <div class="card" style="height:300px;width:250px">
+                            <img class="card-img-top" src="~/Images/stdLogo.png" alt="Card image" style="height:50%;width:50%">
+                            <div class="card-body">
+                                <h4 class="card-title">@Model.lecturerName</h4>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary mr-5">Dept Details</button>
+                <button class="btn btn-primary mr-5">Course Details</button>
+                
+            </div>
+        </div>
+    </div>
+
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

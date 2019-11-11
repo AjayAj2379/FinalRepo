@@ -37,10 +37,23 @@ namespace StudentApplication.Controllers
 
             return View(studentVM);
         }
-
+        [HttpGet]
         public ActionResult CourseDetailsforStudent()
         {
 
+            return View();
+        }
+
+        [HttpGet]
+
+        public ActionResult DeptDetailsforStudent()
+        {
+            return View();
+        }
+        [HttpGet]
+
+        public ActionResult GradeDetailsforStudent()
+        {
             return View();
         }
     }

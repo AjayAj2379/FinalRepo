@@ -291,11 +291,17 @@
     <Content Include="Views\HomePage\HomePage.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\StudentDetails.cshtml" />
+    <Content Include="Views\Student\CourseDetailsforStudent.cshtml" />
+    <Content Include="Views\Student\DeptDetailsforStudent.cshtml" />
+    <Content Include="Views\Student\GradeDetailsforStudent.cshtml" />
+    <Content Include="Views\Teacher\GetTeacherDetails.cshtml" />
+    <Content Include="Views\Teacher\CourseDetailsforTeacher.cshtml" />
+    <Content Include="Views\Teacher\DeptDetailsforTeacher.cshtml" />
+    <Content Include="Views\Department\GetDepartmentDetails.cshtml" />
+    <Content Include="Views\Department\StaffDetailsbyDept.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Department\" />
-    <Folder Include="Views\Teacher\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

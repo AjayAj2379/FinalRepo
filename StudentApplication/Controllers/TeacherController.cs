@@ -8,8 +8,22 @@ namespace StudentApplication.Controllers
 {
     public class TeacherController : Controller
     {
-        // GET: Teacher
-        public ActionResult Index()
+       [HttpGet]
+       
+       public ActionResult GetTeacherDetails()
+        {
+
+            return View();
+        }
+
+        [HttpGet]
+
+        public ActionResult CourseDetailsforTeacher()
+        {
+            return View();
+        }
+
+        public ActionResult DeptDetailsforTeacher()
         {
             return View();
         }
