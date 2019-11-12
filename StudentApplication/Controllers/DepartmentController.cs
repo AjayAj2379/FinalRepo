@@ -15,14 +15,23 @@ namespace StudentApplication.Controllers
         [HttpGet]
         public ActionResult GetDepartmentDetails()
         {
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             List<DepartmentVM> deptDetails = studentAppLogic.GetAllDepartmentDetails();
-            return View();
+            return View(deptDetails);
         }
-        [HttpGet]
-        public ActionResult StaffDetailsbyDept()
-        {
 
-            return View();
+        public ActionResult StaffDetailsbyDept(string deptID)
+        {
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            List<LecturerVM> lecturerDetails = studentAppLogic.GetTeacherbyDept(deptID);
+            return View(lecturerDetails);
         }
+     
     }
 }

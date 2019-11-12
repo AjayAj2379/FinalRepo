@@ -1,4 +1,4 @@
-﻿@model IEnumerable<StudentApplication.Models.LecturerVM>
+﻿@model IEnumerable<StudentApplication.Models.LibraryVM>
 
 @{
     Layout = null;
@@ -13,55 +13,49 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <title>GetDepartmentDetails</title>
+    <title>CourseDetailsforStudent</title>
 </head>
 <body>
     <div class="container mt-5">
         <div class="jumbotron">
             <div class="text-center">
-                <p><b style="font-size:20px">You are currently viewing the Lecturer of the Department</b></p>
+                <p><b style="font-size:20px">You are currently viewing the Library Details of the Courses</b></p>
             </div>
             <br>
-            <table class="table text-center table-hover borderless">
+            <table class="table table-hover borderless">
                 <thead class="thead-dark">
                     <tr>
-                        <th><b>Department ID</b></th>
-                        <th><b>Lecturer ID</b></th>
-                        <th><b>Lecturer Name</b></th>
-
-                        <th><b>Details</b></th>
+                       
+                        <th><b>CourseID</b></th>
+                        <th><b>Course Name</b></th>
+                        <th><b>Author Name</b></th>
+                        <th><b>Rack No</b></th>
+                        <th><b>Year of Publish</b></th>
 
                     </tr>
                 </thead>
 
-
                 @foreach (var item in Model)
-                {
+            {
                     <tbody class="table-info">
                         <tr>
-                            <td><b>@item.departmentId</b></td>
-                            <td><b>@item.lecturerId</b></td>
-                            <td><b>@item.lecturerName</b></td>
-                           
-                            <td><a href="@Url.Action("GetTeacherDetails","Teacher",new { lecturerID = item.lecturerId})"><b>More Details</b></a></td>
+                            <td><b>@item.courseId</b></td>
+                            <td><b>@item.courseName</b></td>
+                            <td><b>@item.authorName</b></td>
+                            <td><b>@item.rackNumber</b></td>
+                            <td><b>@item.yearOfPublishing</b></td>
+                            
 
                         </tr>
 
                     </tbody>
 
+
+
                 }
 
-
-
-
-
-
             </table>
-
-
-
         </div>
     </div>
-
 </body>
 </html>

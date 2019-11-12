@@ -10,6 +10,10 @@ namespace StudentApplication.Controllers
        
         public ActionResult HomePage()
         {
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             return View();
         }
 

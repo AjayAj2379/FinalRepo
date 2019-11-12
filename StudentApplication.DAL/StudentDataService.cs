@@ -1,4 +1,5 @@
 ﻿using StudentApplication.Model;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -239,8 +240,8 @@ namespace StudentApplication.DAL
                     {
                         courseId = sqlDataReader["CourseID"].ToString(),
                         authorName = sqlDataReader["AuthorName"].ToString(),
-                        rackNumber = sqlDataReader["RackNumber"].ToString(),
-                        yearOfPublishing = sqlDataReader["YearofPublishing"].ToString()
+                        rackNumber =Convert.ToInt32(sqlDataReader["RackNumber"]),
+                        yearOfPublishing = Convert.ToInt64(sqlDataReader["YearofPublising"])
                     });
                 }
             }
