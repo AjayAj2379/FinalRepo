@@ -12,10 +12,8 @@ namespace StudentApplication.BL
     public class StudentAppLogic
     {
         private static readonly log4net.ILog log =
-           log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
+        log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         StudentDataService studentDataService = new StudentDataService();
-
         /// <summary>
         /// Gets list containing details of a particular student
         /// </summary>
@@ -24,7 +22,6 @@ namespace StudentApplication.BL
         /// <exception cref="Exception">Handles Exception</exception>
         public List<StudentVM> GetStudentData(string studentID)
         {
-
             List<StudentVM> result = new List<StudentVM>();
             try
             {

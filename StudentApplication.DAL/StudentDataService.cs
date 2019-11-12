@@ -15,7 +15,7 @@ namespace StudentApplication.DAL
         SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString);
 
         private static readonly log4net.ILog log =
-         log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// Check whether the given studentID is present in the Student Table
@@ -68,7 +68,6 @@ namespace StudentApplication.DAL
             {
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = null;
-
                 string query = "Select * from Student_Table where StudentID ='" + studentID + "'";
                 using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
@@ -113,7 +112,6 @@ namespace StudentApplication.DAL
             {
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = null;
-
                 string query = "Select * from Student_Table";
                 using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
