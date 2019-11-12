@@ -21,13 +21,13 @@
 }
     </style>
 </head>
-<body>
+<body style="background-color:#ff9999">
 
 
     @foreach (var item in Model)
     {
         <div class="container mt-5">
-            <div class="jumbotron">
+            <div class="jumbotron" style=" background: linear-gradient(to left, #ffcc99 0%, #ccffcc 100%);">
                 <div class="row" style="margin:50px">
                     <div class="col-md-8">
                         <table class="table col-md-4 borderless" align="center">
@@ -68,8 +68,10 @@
                     <div class="col-md-4">
                         <div>
 
-                            <div class="card" style="height:300px;width:250px">
-                                <img class="card-img-top" src="~/Images/stdLogo.png" alt="Card image" style="height:50%;width:50%">
+                            <div class="card" style="height:300px;width:250px;background-color:#BFE0E0">
+                                <center>
+                                    <img class="card-img-top" src="~/Images/studentLogo.png" alt="Card image" style="height:200px;width:280px">
+                                </center>
                                 <div class="card-body">
                                     <h4 class="card-title">@item.studentName</h4>
                                     <p class="card-text">Academic Year : 2015-2019</p>
@@ -81,9 +83,9 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-primary mr-5" onclick="location.href='@Url.Action("DeptDetailsforStudent","Student", new { deptId = item.depatmentID })'">Dept Details</button>
-                    <button class="btn btn-primary mr-5"  onclick="location.href='@Url.Action("CourseDetailsforStudent","Student", new { deptId = item.depatmentID })'">Course Details</button>
-                    <button class="btn btn-primary mr-5"  onclick="location.href='@Url.Action("GradeDetailsforStudent","Student", new { studentId = item.studentID })'" >Grade Details</button>
+                    <button class="btn btn-info mr-5" onclick="location.href='@Url.Action("DeptDetailsforStudent","Student", new { deptId = item.depatmentID })'">Dept Details</button>
+                    <button class="btn btn-info mr-5"  onclick="location.href='@Url.Action("CourseDetailsforStudent","Student", new { deptId = item.depatmentID })'">Course Details</button>
+                    <button class="btn btn-info mr-5"  onclick="location.href='@Url.Action("GradeDetailsforStudent","Student", new { studentId = item.studentID })'" >Grade Details</button>
                 </div>
             </div>
         </div>

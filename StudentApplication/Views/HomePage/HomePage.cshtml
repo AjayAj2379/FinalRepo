@@ -11,23 +11,26 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="background-color:#D9C99A ">
 
     <div class="w3-container">
         <div class="row" style="margin:70px;">
-            <div class="col-md-6">
-                <div class="w3-card-4" style="width:350px">
-
-                    <img id="student" data-toggle="modal" data-target="#myModal" src="~/Images/stdLogo.png" alt="Alps" style="width:350px; height:400px;cursor:pointer">
+            <div class="col-md-6" >
+                <div class="w3-card-4" style="width:350px;background: linear-gradient(to top left, #66ccff 0%, #ff6699 100%);height:400px">
+                    <center>
+                        <img id="student" data-toggle="modal" data-target="#myModal" src="~/Images/studentLogo.png" alt="Alps" style="width:350px; height:370px;cursor:pointer">
+                    </center>  
                     <div class="w3-container w3-center">
                         <b>Student</b>
                     </div>
                 </div>
 
             </div>
-            <div class="col-md-6">
-                <div class="w3-card-4" style="width:350px">
-                    <img id="teacher" data-toggle="modal" data-target="#mytechModal" src="~/Images/teachLogo.jpg" alt="Alps" style="width:350px; height:400px;cursor:pointer"/>
+            <div class="col-md-6" >
+                <div class="w3-card-4" style="width:350px;background: linear-gradient(to top left, #66ccff 0%, #ff6699 100%);height:400px">
+                    <center>
+                        <img id="teacher" data-toggle="modal" data-target="#mytechModal" src="~/Images/teacherLogo.png" alt="Alps" style="width:300px; height:370px;cursor:pointer" />
+                    </center>
                     
                     <div class="w3-container w3-center">
                         <b>Teacher</b>
@@ -43,7 +46,7 @@
         <!--Student Modal -->
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog modal-sm">
-                <div class="modal-content">
+                <div class="modal-content" style=" background: linear-gradient(to bottom right, #66ccff 0%, #ccffcc 100%);">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title"><b>Student Details</b></h4>
@@ -60,7 +63,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -69,7 +72,7 @@
     <!--Teacher Modal -->
     <div class="modal fade" id="mytechModal" role="dialog">
         <div class="modal-dialog modal-sm">
-            <div class="modal-content">
+            <div class="modal-content" style=" background: linear-gradient(to bottom right, #66ccff 0%, #ccffcc 100%);">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title"><b>Teacher Details</b></h4>
@@ -85,7 +88,7 @@
                     <p id="ErrorTech" style="color:red;margin-left:40px"><b>Invalid ID</b> </p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -103,10 +106,14 @@
         // Student
         $("#studentinput").click(function () {           
             var val = $("#studentvalue").val();
-            console.log(val)
+            if (val == "") {
+                $("#ErrorStud").show();
+            }
+           
             
-            debugger;
-            $.ajax({
+         
+            else {
+                  $.ajax({
                 type:'GET',
                 url: "/Student/StudentDetails",
                 data: { stdID: val },
@@ -131,6 +138,8 @@
                 }
                 
             })
+            }
+          
         });
 
         //Teacher
@@ -138,9 +147,11 @@
         $("#teacherinput").click(function () {
             var val = $("#teachervalue").val();
             console.log(val)
-
-            debugger;
-            $.ajax({
+            if (val == "") {
+                $("#ErrorTech").show();
+            }
+            else {
+                 $.ajax({
                 type: 'GET',
                 url: "/Teacher/GetTeacherDetails",
                 data: { lecturerID: val },
@@ -162,6 +173,8 @@
                 }
 
             })
+            }
+           
         });
     });
     </script>

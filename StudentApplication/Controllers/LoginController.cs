@@ -12,6 +12,8 @@ namespace StudentApplication.Controllers
         // GET: Login
         public ActionResult Login()
         {
+            Session.RemoveAll();
+            Session.Abandon();
             return View();
         }
 
@@ -31,11 +33,12 @@ namespace StudentApplication.Controllers
             return View(loginModel);
         }
 
+        [HttpGet]
         public ActionResult Logout()
         {
             Session.RemoveAll();
             Session.Abandon();
-            return RedirectToAction("LoginPage");
+            return RedirectToAction("Login");
         }
 
     }

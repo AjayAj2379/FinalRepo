@@ -43,9 +43,8 @@ namespace StudentApplication.DAL
             catch (SqlException sqlexception)
             {
                 log.Info("\n------------Sql Exception------");
-                log.Error(sqlexception.ToString());
-                bool exception = Convert.ToBoolean(sqlexception);
-                return exception;
+                log.Error(sqlexception.ToString());            
+                return false;
 
             }
             finally
@@ -214,7 +213,7 @@ namespace StudentApplication.DAL
                             courseId = sqlDataReader["CourseID"].ToString(),
                             courseName = sqlDataReader["CourseName"].ToString(),
                             lecturerId = sqlDataReader["LecturerID"].ToString(),
-                            departmentId = sqlDataReader["LecturerID"].ToString(),
+                            departmentId = sqlDataReader["DepartmentID"].ToString(),
                             semesterId = sqlDataReader["SemesterID"].ToString()
                         });
                     }
@@ -340,9 +339,8 @@ namespace StudentApplication.DAL
             catch (SqlException sqlexception)
             {
                 log.Info("\n------------Sql Exception------");
-                log.Error(sqlexception.ToString());
-                bool exception = Convert.ToBoolean(sqlexception);
-                return exception;
+                log.Error(sqlexception.ToString());        
+                return false;
 
             }
             finally

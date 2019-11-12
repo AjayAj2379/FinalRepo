@@ -22,11 +22,11 @@
         }
     </style>
 </head>
-<body>
+<body style="background-color:#ff9999">
     @foreach (var item in Model)
     {
         <div class="container mt-5">
-            <div class="jumbotron">
+            <div class="jumbotron"  style=" background: linear-gradient(to left, #ffcc99 0%, #ccffcc 100%);">
                 <div class="text-center">
                     <p style="font-size:20px"><b>LECTURER DETAILS</b></p>
                 </div>
@@ -67,8 +67,10 @@
                     <div class="col-md-4">
                         <div>
 
-                            <div class="card" style="height:300px;width:250px">
-                                <img class="card-img-top" src="~/Images/stdLogo.png" alt="Card image" style="height:50%;width:50%">
+                            <div class="card" style="height:300px;width:250px;background-color:#BFE0E0">
+                                <center>
+                                    <img class="card-img-top" src="~/Images/teacherLogo.png" alt="Card image" style="height:200px;width:280px">
+                                </center>                               
                                 <div class="card-body">
                                     <h4 class="card-title">@item.lecturerName</h4>
 
@@ -89,10 +91,6 @@
 
 
     }
-    
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+ 
 </body>
 </html>

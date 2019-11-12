@@ -16,11 +16,11 @@
 
 </head>
 
-<body>
+<body style="background:linear-gradient(to right, #ffcccc 0%, #ff99cc 100%);">
+    <br /><br />
+    <div class="container mt-4" >
 
-    <div class="container mt-4">
-
-        <div class="jumbotron">
+        <div class="jumbotron" style="background: linear-gradient(to bottom right, #66ccff 0%, #ff6699 100%);margin:auto">
 
             
                 @using (Html.BeginForm("Login", "Login", FormMethod.Post))
@@ -48,7 +48,7 @@
                     <br>
                     <div class="row text-center">
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary">Login</button>
+                            <button type="submit" class="btn btn-info" style="width:100%">Login</button>
                         </div>
                       </div>
                     <div class="row text-center mt-4">
