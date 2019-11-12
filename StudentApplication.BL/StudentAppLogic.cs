@@ -172,7 +172,7 @@ namespace StudentApplication.BL
                 var courseDetails = studentDataService.GetCourseData().Where(course =>
               course.courseId.Equals(courseId));
 
-                result = libraryDetails.Join(
+                 result = libraryDetails.Join(
                      courseDetails,
                      library => library.courseId,
                      course => course.courseId,
@@ -192,6 +192,31 @@ namespace StudentApplication.BL
                 log.Error(exception.ToString());
             }
             return result;
+        }
+
+        public List<LecturerVM> GetTeacherbyDept (string deptID)
+        {
+            List<LecturerVM> lecturerDetails = new List<LecturerVM>();
+            try
+            {
+                 lecturerDetails = studentDataService.GetLecturerData().Where(teacher =>
+            teacher.departmentId.Equals(deptID)).Select( lecturer => new LecturerVM
+                    {
+                        lecturerId = lecturer.lecturerId,
+                        lecturerName = lecturer.lecturerName,
+                        email = lecturer.email,
+                        phoneNumber = lecturer.phoneNumber,
+                        departmentId = lecturer.departmentId,
+                       
+                    }
+                    ).ToList();
+            }
+            catch (Exception exception)
+            {
+                log.Info("\n----------Exception------\n");
+                log.Error(exception.ToString());
+            }
+            return lecturerDetails;
         }
         //public ArrayList GetTeachers(string subjectName)
         //{
