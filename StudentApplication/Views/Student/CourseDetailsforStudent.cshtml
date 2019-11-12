@@ -43,7 +43,7 @@
                         <td><b>@item.courseId</b></td>
                         <td><b>@item.courseName</b></td>
                         <td><b>@item.semesterId</b></td>
-                        <td><a href=""><b>Library Details</b></a></td>
+                        <td><a href="@Url.Action("GetLibraryDetails", "Library", new { courseID = item.courseId})"><b>Library Details</b></a></td>
 
                     </tr>
 

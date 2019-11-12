@@ -2,6 +2,7 @@
 using StudentApplication.Model;
 
 using StudentApplication.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -97,6 +98,21 @@ namespace StudentApplication.BL
             return courseList;
         }
 
+        public List<LecturerVM> GetTeacherbyDept(string deptID)
+        {
+            var lecturerList = studentDataService.GetLecturerData().Where(lecturer =>
+           lecturer.departmentId.Equals(deptID)
+           ).Select(course => new LecturerVM
+           {
+               departmentId = course.departmentId,
+               lecturerId = course.lecturerId,
+               lecturerName = course.lecturerName
+
+           }).ToList();
+
+            return lecturerList;
+        }
+
         public List<LibraryVM> GetLibraryDetails(string courseId)
         {
             var libraryDetails = studentDataService.GetLibraryData().Where(library =>
@@ -113,8 +129,8 @@ namespace StudentApplication.BL
                     courseId = library.courseId,
                     courseName = course.courseName,
                     authorName = library.authorName,
-                    rackNumber = library.rackNumber,
-                    yearOfPublishing = library.yearOfPublishing
+                    rackNumber =  library.rackNumber,
+                    yearOfPublishing =library.yearOfPublishing,
                 }
                 ).ToList();
             return result;

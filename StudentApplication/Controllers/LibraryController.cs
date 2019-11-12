@@ -8,18 +8,18 @@ using System.Web.Mvc;
 
 namespace StudentApplication.Controllers
 {
-    public class SemesterController : Controller
+    public class LibraryController : Controller
     {
         StudentAppLogic studentAppLogic = new StudentAppLogic();
-       
-        public ActionResult GetSemesterDetails()
+
+        public ActionResult GetLibraryDetails(string courseID)
         {
             if (Session["Username"] == null)
             {
                 return RedirectToAction("Login", "Login");
             }
-            List<SemesterVM> semesterDetails = studentAppLogic.GetAllSemesterDetails();
-            return View(semesterDetails);
+            List<LibraryVM> libraryDetails = studentAppLogic.GetLibraryDetails(courseID);
+            return View(libraryDetails);
         }
     }
 }

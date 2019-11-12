@@ -18,6 +18,10 @@ namespace StudentApplication.Controllers
         [HttpGet]
         public ActionResult StudentDetails(string stdID)
         {
+            if(Session["Username"]==null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             List<StudentVM> studentList = studentAppLogic.GetStudentData(stdID);
             return View(studentList);
         }
@@ -31,6 +35,10 @@ namespace StudentApplication.Controllers
         [HttpGet]
         public ActionResult CourseDetailsforStudent(string deptId)
         {
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             List<CourseVM> courseDetails = studentAppLogic.GetDepartmentCourses(deptId);
            
             return View(courseDetails);
@@ -45,6 +53,10 @@ namespace StudentApplication.Controllers
 
         public ActionResult DeptDetailsforStudent(string deptId)
         {
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             List<DepartmentVM> departmentDetails = studentAppLogic.GetDepartmentDetails(deptId);
             return View(departmentDetails);
         }
@@ -58,6 +70,11 @@ namespace StudentApplication.Controllers
 
         public ActionResult GradeDetailsforStudent(string studentId)
         {
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
             List<GradeVM> gradeDetails = studentAppLogic.GetSemGrades(studentId);
             return View(gradeDetails);
         }

@@ -21,13 +21,21 @@ namespace StudentApplication.Controllers
         {
             if(loginModel.userName=="admin" && loginModel.password=="admin@123")
             {
-
+                Session["Username"] = loginModel.userName;
+                return RedirectToAction("HomePage", "Homepage");
             }
             else
             {
                 ViewBag.Message = "Enter the correct login details";
             }
             return View(loginModel);
+        }
+
+        public ActionResult Logout()
+        {
+            Session.RemoveAll();
+            Session.Abandon();
+            return RedirectToAction("LoginPage");
         }
 
     }

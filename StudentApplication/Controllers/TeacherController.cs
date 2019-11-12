@@ -17,7 +17,12 @@ namespace StudentApplication.Controllers
        
        public ActionResult GetTeacherDetails(string lecturerID)
         {
-           List<LecturerVM> lecturerDetails = studentAppLogic.GetTeacherDetails(lecturerID);
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
+            List<LecturerVM> lecturerDetails = studentAppLogic.GetTeacherDetails(lecturerID);
             return View(lecturerDetails);
         }
 
@@ -25,12 +30,21 @@ namespace StudentApplication.Controllers
 
         public ActionResult CourseDetailsforTeacher(string lecturerID)
         {
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
             List<CourseVM> courseDetails = studentAppLogic.GetTeacherCourses(lecturerID);
             return View(courseDetails);
         }
 
         public ActionResult DeptDetailsforTeacher(string deptID)
         {
+            if (Session["Username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             List<DepartmentVM> departmentDetails = studentAppLogic.GetDepartmentDetails(deptID);
             return View(departmentDetails);
         }

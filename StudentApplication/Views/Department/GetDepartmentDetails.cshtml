@@ -16,16 +16,18 @@
     <title>GetDepartmentDetails</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-5">
         <div class="jumbotron">
-            <table class="table text-center table-hover borderless">
+            <div class="text-center">
+                <p><b style="font-size:20px">All Department Details</b></p>
+            </div>
+            <table class="table table-hover borderless">
                 <thead class="thead-dark">
                     <tr>
                         <th><b>Department ID</b></th>
                         <th><b>Department Name</b></th>
                         <th><b>Department Head</b></th>
-                        <th><b>Staff count</b></th>
-                        <th><b>Details</b></th>
+                          <th><b>Details</b></th>
 
                     </tr>
                 </thead>
@@ -39,7 +41,7 @@
                             <td><b>@item.departmentName</b></td>
                             <td><b>@item.departmentHead</b></td>
                             
-                            <td><a href=""><b>See other Staff Details</b></a></td>
+                            <td><a href="@Url.Action("StaffDetailsbyDept","Department", new { deptID = item.departmentId})"><b>See other Staff Details</b></a></td>
 
                         </tr>
 
@@ -54,9 +56,7 @@
 
             </table>
 
-
-
-        </div>
+          </div>
     </div>
 
 </body>
