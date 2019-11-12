@@ -1,4 +1,6 @@
-﻿using System;
+﻿using StudentApplication.BL;
+using StudentApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,16 +10,15 @@ namespace StudentApplication.Controllers
 {
     public class DepartmentController : Controller
     {
-        [HttpGet]
+        StudentAppLogic studentAppLogic = new StudentAppLogic();
 
+        [HttpGet]
         public ActionResult GetDepartmentDetails()
         {
-
+            List<DepartmentVM> deptDetails = studentAppLogic.GetAllDepartmentDetails();
             return View();
         }
-
         [HttpGet]
-
         public ActionResult StaffDetailsbyDept()
         {
 

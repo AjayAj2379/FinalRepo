@@ -1,4 +1,4 @@
-﻿@model StudentApplication.Models.DepartmentVM
+﻿@model IEnumerable<StudentApplication.Models.DepartmentVM>
 
 @{
     Layout = null;
@@ -16,42 +16,40 @@
     <title>DeptDetailsforStudent</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-5">
         <div class="jumbotron">
             <div class="text-center">
-                <p style="font-size:20px"><b>You are currently viewing the Department details</b></p>
+                <p style="font-size:20px"><b>You are currently viewing the Department details of the LECTURER</b></p>
             </div>
 
-            <table class="table col-md-4 borderless" align="center">
+            @foreach (var item in Model)
+            {
+                <table class="table col-md-4 borderless" align="center">
 
-                <tbody>
-                    <tr>
-                        <td><b><span>DepartmentId</span></b></td>
-                        <td><b>@Model.departmentId</b></td>
-                    </tr>
-                    <tr>
-                        <td><b><span>Department Name</span></b></td>
-                        <td><b>@Model.departmentName</b></td>
-                    </tr>
-                    <tr>
-                        <td><b><span>Department Head  </span></b></td>
-                        <td><b>@Model.departmentHead</b></td>
-                    </tr>
-                    <tr>
-                        <td><b><span>Staff Count</span></b></td>
-                        <td><b>@Model.staffCount</b></td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td><b><span>DepartmentId</span></b></td>
+                            <td><b>@item.departmentId</b></td>
+                        </tr>
+                        <tr>
+                            <td><b><span>Department Name</span></b></td>
+                            <td><b>@item.departmentName</b></td>
+                        </tr>
+                        <tr>
+                            <td><b><span>Department Head  </span></b></td>
+                            <td><b>@item.departmentHead</b></td>
+                        </tr>
 
-                </tbody>
-            </table>
+
+                    </tbody>
+                </table>
+            }
+           
 
 
         </div>
     </div>
 
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+   
 </body>
 </html>

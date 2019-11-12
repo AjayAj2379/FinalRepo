@@ -1,5 +1,5 @@
 ﻿
-@model StudentApplication.Models.LecturerVM
+@model IEnumerable<StudentApplication.Models.LecturerVM>
 
 @{
     Layout = null;
@@ -23,65 +23,73 @@
     </style>
 </head>
 <body>
-
-    <div class="container mt-5">
-        <div class="jumbotron">
-            <div class="row" style="margin:50px">
-                <div class="col-md-8">
-                    <table class="table col-md-4 borderless" align="center">
-
-                        <tbody class="mt-5">
-                            <tr>
-                                <td><b><span>Enroll Number</span></b></td>
-                                <td><b> @Model.lecturerId </b></td>
-                            </tr>
-                            <tr>
-                                <td><b><span>Lecturer Name</span></b></td>
-                                <td><b>@Model.lecturerName</b></td>
-                            </tr>
-                            <tr>
-                                <td><b><span>Email Address</span></b></td>
-                                <td><b> @Model.email</b></td>
-                            </tr>
-                            <tr>
-                                <td><b><span>Phone Number</span></b></td>
-                                <td>
-                                    <b>@Model.phoneNumber </b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><b><span>Department Name</span></b></td>
-                                <td><b> @Model.departmentName</b></td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
+    @foreach (var item in Model)
+    {
+        <div class="container mt-5">
+            <div class="jumbotron">
+                <div class="text-center">
+                    <p style="font-size:20px"><b>LECTURER DETAILS</b></p>
                 </div>
+                <br>
+                <div class="row" style="margin:50px">
+                    <div class="col-md-8">
+                        <table class="table col-md-4 borderless" align="center">
 
-                <div class="col-md-4">
-                    <div>
+                            <tbody class="mt-5">
+                                <tr>
+                                    <td><b><span>Enroll Number</span></b></td>
+                                    <td><b> @item.lecturerId </b></td>
+                                </tr>
+                                <tr>
+                                    <td><b><span>Lecturer Name</span></b></td>
+                                    <td><b>@item.lecturerName</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b><span>Email Address</span></b></td>
+                                    <td><b> @item.email</b></td>
+                                </tr>
+                                <tr>
+                                    <td><b><span>Phone Number</span></b></td>
+                                    <td>
+                                        <b>@item.phoneNumber </b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b><span>Department Name</span></b></td>
+                                    <td><b> @item.departmentName</b></td>
+                                </tr>
 
-                        <div class="card" style="height:300px;width:250px">
-                            <img class="card-img-top" src="~/Images/stdLogo.png" alt="Card image" style="height:50%;width:50%">
-                            <div class="card-body">
-                                <h4 class="card-title">@Model.lecturerName</h4>
-
-                            </div>
-                        </div>
+                            </tbody>
+                        </table>
 
                     </div>
+
+                    <div class="col-md-4">
+                        <div>
+
+                            <div class="card" style="height:300px;width:250px">
+                                <img class="card-img-top" src="~/Images/stdLogo.png" alt="Card image" style="height:50%;width:50%">
+                                <div class="card-body">
+                                    <h4 class="card-title">@item.lecturerName</h4>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary mr-5"  onclick="location.href='@Url.Action("DeptDetailsforTeacher","Teacher", new { deptID = item.departmentId })'">Dept Details</button>
+                    <button class="btn btn-primary mr-5"  onclick="location.href='@Url.Action("CourseDetailsforTeacher","Teacher", new { lecturerID = item.lecturerId })'">Course Details</button>
+
                 </div>
             </div>
-            <div class="text-center">
-                <button class="btn btn-primary mr-5">Dept Details</button>
-                <button class="btn btn-primary mr-5">Course Details</button>
-                
-            </div>
         </div>
-    </div>
 
 
+
+    }
+    
     <p>
         @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
         @Html.ActionLink("Back to List", "Index")

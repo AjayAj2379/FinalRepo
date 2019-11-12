@@ -9,6 +9,11 @@ namespace StudentApplication.Controllers
     {
         StudentAppLogic studentAppLogic = new StudentAppLogic();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="stdID"></param>
+        /// <returns></returns>
 
         [HttpGet]
         public ActionResult StudentDetails(string stdID)
@@ -21,24 +26,45 @@ namespace StudentApplication.Controllers
             ViewBag.Message = "InvalidID";
             return Json(ViewBag.Message, JsonRequestBehavior.AllowGet);
         }
-        [HttpGet]
-        public ActionResult CourseDetailsforStudent()
-        {
 
-            return View();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// 
+
+        [HttpGet]
+        public ActionResult CourseDetailsforStudent(string deptId)
+        {
+            List<CourseVM> courseDetails = studentAppLogic.GetDepartmentCourses(deptId);
+           
+            return View(courseDetails);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// 
         [HttpGet]
 
-        public ActionResult DeptDetailsforStudent()
+        public ActionResult DeptDetailsforStudent(string deptId)
         {
-            return View();
+            List<DepartmentVM> departmentDetails = studentAppLogic.GetDepartmentDetails(deptId);
+            return View(departmentDetails);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// 
         [HttpGet]
 
-        public ActionResult GradeDetailsforStudent()
+        public ActionResult GradeDetailsforStudent(string studentId)
         {
-            return View();
+            List<GradeVM> gradeDetails = studentAppLogic.GetSemGrades(studentId);
+            return View(gradeDetails);
         }
     }
 }

@@ -81,9 +81,9 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-primary mr-5">Dept Details</button>
-                    <button class="btn btn-primary mr-5">Course Details</button>
-                    <button class="btn btn-primary mr-5">Grade Details</button>
+                    <button class="btn btn-primary mr-5" onclick="location.href='@Url.Action("DeptDetailsforStudent","Student", new { deptId = item.depatmentID })'">Dept Details</button>
+                    <button class="btn btn-primary mr-5"  onclick="location.href='@Url.Action("CourseDetailsforStudent","Student", new { deptId = item.depatmentID })'">Course Details</button>
+                    <button class="btn btn-primary mr-5"  onclick="location.href='@Url.Action("GradeDetailsforStudent","Student", new { studentId = item.studentID })'" >Grade Details</button>
                 </div>
             </div>
         </div>

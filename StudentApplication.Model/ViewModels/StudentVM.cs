@@ -9,6 +9,8 @@ namespace StudentApplication.Models
     {
         public string studentID { get; set; }
 
+        public string depatmentID { get; set; }
+
         public string studentName { get; set; }
 
         public string studentEmail { get; set; }

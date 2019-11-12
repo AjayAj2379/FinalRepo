@@ -16,12 +16,13 @@
     <title>CourseDetailsforStudent</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-5">
     <div class="jumbotron">
         <div class="text-center">
-            <p><b>You are currently viewing the Department courses of 7th and 8th Semester</b></p>
+            <p><b style="font-size:20px">You are currently viewing the Department courses of 7th and 8th Semester</b></p>
         </div>
-        <table class="table text-center table-hover borderless">
+        <br>
+        <table class="table table-hover borderless">
             <thead class="thead-dark">
                 <tr>
                     <th><b>DepartmentID</b></th>
@@ -38,10 +39,10 @@
             {
                 <tbody class="table-info">
                     <tr>
-                        <td><b>@item.depatmentId</b></td>
+                        <td><b>@item.departmentId</b></td>
                         <td><b>@item.courseId</b></td>
                         <td><b>@item.courseName</b></td>
-                        <td><b>@item.semesterName</b></td>
+                        <td><b>@item.semesterId</b></td>
                         <td><a href=""><b>Library Details</b></a></td>
 
                     </tr>
