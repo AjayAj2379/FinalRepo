@@ -229,7 +229,7 @@ namespace StudentApplication.DAL
             sqlConnection.Open();
             SqlDataReader sqlDataReader = null;
             List<LibraryModel> libraryModel = new List<LibraryModel>();
-            string query = "Select * from Libraryr_Table";
+            string query = "Select * from Library_Table";
             using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
             {
                 sqlDataReader = sqlCommand.ExecuteReader();
