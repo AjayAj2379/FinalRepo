@@ -53,8 +53,11 @@
     
                             <input type="text" class="form-control col-lg-4" style="margin-left:30px" id="studentvalue"  placeholder="Enter the studentID">
                             <button type="button" class="btn btn-primary" id="studentinput" style="margin-left:30px">Click</button>
+                            
 
                         </div>
+                        <p id="ErrorStud" style="color:red"><b>Invalid ID</b> </p>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -79,6 +82,7 @@
                         <button type="button" class="btn btn-primary" id="teacherinput" style="margin-left:30px">Click</button>
 
                     </div>
+                    <p id="ErrorTech" style="color:red"><b>Invalid ID</b> </p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -93,6 +97,9 @@
 <script>
     $(document).ready(function () {
 
+        $("#ErrorStud").hide();
+        $("#ErrorTech").hide();
+
         // Student
         $("#studentinput").click(function () {           
             var val = $("#studentvalue").val();
@@ -106,9 +113,16 @@
                 success: function (data) {
                     console.log("success");
                     console.log(data);
-                    var value = $("#studentvalue").val();
+                    if (data == "Invalid ID")
+                    {
+                        $("#ErrorStud").show();
+                    }
+                    
+                else
+                  {
+                     location.href= '/Student/StudentDetails?stdId='+val;
+                    }
                   
-                   location.href= '/Student/StudentDetails?stdId='+val;
                    
                 },
                 failure: function (data) {
@@ -132,7 +146,13 @@
                 success: function (data) {
                     console.log("success");
                     console.log(data);
-                    location.href = '/Teacher/GetTeacherDetails?lecturerID=' + val;
+                    if (data == "Invalid ID") {
+                        $("#ErrorTech").show();
+                    }
+                    else {
+                        location.href = '/Teacher/GetTeacherDetails?lecturerID=' + val;
+                    }
+                  
 
                 },
                 failure: function (data) {
