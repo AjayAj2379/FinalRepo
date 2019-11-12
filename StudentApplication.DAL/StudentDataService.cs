@@ -12,10 +12,12 @@ namespace StudentApplication.DAL
         public bool CheckStudentID(string studentID)
         {
             sqlConnection.Open();
+            SqlDataReader sqlDataReader = null;
             string query = "Select * from Student_Table where StudentID ='" + studentID + "'";
             using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
             {
-                if (sqlCommand.ExecuteNonQuery() > 0)
+                sqlDataReader = sqlCommand.ExecuteReader();
+                if (sqlDataReader.HasRows)
                 {
                     sqlConnection.Close();
                     return true;
@@ -181,10 +183,12 @@ namespace StudentApplication.DAL
         public bool CheckLecturerID(string lecturerID)
         {
             sqlConnection.Open();
+            SqlDataReader sqlDataReader = null;
             string query = "SELECT * from Lecturer_Table  where LecturerId ='" + lecturerID + "'";
             using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
             {
-                if (sqlCommand.ExecuteNonQuery() > 0)
+                sqlDataReader = sqlDataReader = sqlCommand.ExecuteReader();
+                if (sqlDataReader.HasRows)
                 {
                     sqlConnection.Close();
                     return true;
