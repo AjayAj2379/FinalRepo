@@ -1,5 +1,4 @@
 ﻿using StudentApplication.Model;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -10,14 +9,30 @@ namespace StudentApplication.DAL
     {
         SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString);
 
+        public bool CheckStudentID(string studentID)
+        {
+            sqlConnection.Open();
+            string query = "Select * from Student_Table where StudentID ='" + studentID + "'";
+            using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+            {
+                if (sqlCommand.ExecuteNonQuery() > 0)
+                {
+                    sqlConnection.Close();
+                    return true;
+                }
+                sqlConnection.Close();
+                return false;
+            }
+
+        }
+
         public List<StudentModel> GetStudentData(string studentID)
         {
-         
-           
+
             sqlConnection.Open();
             SqlDataReader sqlDataReader = null;
-            List<StudentModel> studentModel = new List<StudentModel>();            
-            string query = "Select * from Student_Table where StudentID ='"+studentID+"'";
+            List<StudentModel> studentModel = new List<StudentModel>();
+            string query = "Select * from Student_Table where StudentID ='" + studentID + "'";
             using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
             {
                 sqlDataReader = sqlCommand.ExecuteReader();
@@ -35,10 +50,11 @@ namespace StudentApplication.DAL
 
                     });
                 }
-            }         
+            }
             sqlConnection.Close();
             return studentModel;
         }
+
         public List<StudentModel> GetStudents()
         {
             sqlConnection.Open();
@@ -71,7 +87,7 @@ namespace StudentApplication.DAL
         {
             sqlConnection.Open();
             SqlDataReader sqlDataReader = null;
-            List<DepartmentModel> departmentModel = new List<DepartmentModel>();            
+            List<DepartmentModel> departmentModel = new List<DepartmentModel>();
             string query = "Select * from Department_Table";
             using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
             {
@@ -107,8 +123,8 @@ namespace StudentApplication.DAL
                         courseId = sqlDataReader["CourseID"].ToString(),
                         courseName = sqlDataReader["CourseName"].ToString(),
                         lecturerId = sqlDataReader["LecturerID"].ToString(),
-                        departmentId = sqlDataReader["DepartmentID"].ToString(),
-                        semesterId = sqlDataReader["SemesterID"].ToString()                      
+                        departmentId = sqlDataReader["LecturerID"].ToString(),
+                        semesterId = sqlDataReader["SemesterID"].ToString()
                     });
                 }
             }
@@ -129,14 +145,16 @@ namespace StudentApplication.DAL
                     gradeModel.Add(new GradeModel
                     {
                         grade = sqlDataReader["Grade"].ToString(),
-                        semesterId=sqlDataReader["SemesterID"].ToString(),
-                        studentId=sqlDataReader["StudentID"].ToString()                        
+                        semesterId = sqlDataReader["SemesterID"].ToString(),
+                        studentId = sqlDataReader["StudentID"].ToString()
                     });
                 }
             }
             sqlConnection.Close();
             return gradeModel;
         }
+
+
 
         public List<SemesterModel> GetSemesterData()
         {
@@ -152,13 +170,29 @@ namespace StudentApplication.DAL
                     semesterModel.Add(new SemesterModel
                     {
                         semesterId = sqlDataReader["SemesterID"].ToString(),
-                        semesterName=sqlDataReader["SemesterNumber"].ToString(),
-                        semesterMontYear=sqlDataReader["SemesterMonth_Year"].ToString()
+                        semesterName = sqlDataReader["SemesterNumber"].ToString(),
+                        semesterMontYear = sqlDataReader["SemesterMonth_Year"].ToString()
                     });
                 }
             }
             sqlConnection.Close();
             return semesterModel;
+        }
+        public bool CheckLecturerID(string lecturerID)
+        {
+            sqlConnection.Open();
+            string query = "SELECT * from Lecturer_Table  where LecturerId ='" + lecturerID + "'";
+            using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+            {
+                if (sqlCommand.ExecuteNonQuery() > 0)
+                {
+                    sqlConnection.Close();
+                    return true;
+                }
+                sqlConnection.Close();
+                return false;
+            }
+
         }
 
         public List<LecturerModel> GetLecturerData()
@@ -174,11 +208,11 @@ namespace StudentApplication.DAL
                 {
                     lecturerModel.Add(new LecturerModel
                     {
-                     lecturerId=sqlDataReader["LecturerId"].ToString(),
-                     lecturerName=sqlDataReader["LecturerName"].ToString(),
-                     email=sqlDataReader["Email"].ToString(),
-                     phoneNumber=sqlDataReader["PhoneNumber"].ToString(),
-                     departmentId=sqlDataReader["DepartmentID"].ToString()
+                        lecturerId = sqlDataReader["LecturerId"].ToString(),
+                        lecturerName = sqlDataReader["LecturerName"].ToString(),
+                        email = sqlDataReader["Email"].ToString(),
+                        phoneNumber = sqlDataReader["PhoneNumber"].ToString(),
+                        departmentId = sqlDataReader["DepartmentID"].ToString()
                     });
                 }
             }
@@ -191,7 +225,7 @@ namespace StudentApplication.DAL
             sqlConnection.Open();
             SqlDataReader sqlDataReader = null;
             List<LibraryModel> libraryModel = new List<LibraryModel>();
-            string query = "Select * from Library_Table";
+            string query = "Select * from Libraryr_Table";
             using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
             {
                 sqlDataReader = sqlCommand.ExecuteReader();
@@ -199,10 +233,10 @@ namespace StudentApplication.DAL
                 {
                     libraryModel.Add(new LibraryModel
                     {
-                     courseId=sqlDataReader["CourseID"].ToString(),
-                     authorName=sqlDataReader["AuthorName"].ToString(),
-                     rackNumber= Convert.ToInt32( sqlDataReader["RackNumber"]),
-                     yearOfPublishing=Convert.ToInt64(sqlDataReader["YearofPublising"] ) 
+                        courseId = sqlDataReader["CourseID"].ToString(),
+                        authorName = sqlDataReader["AuthorName"].ToString(),
+                        rackNumber = sqlDataReader["RackNumber"].ToString(),
+                        yearOfPublishing = sqlDataReader["YearofPublishing"].ToString()
                     });
                 }
             }
