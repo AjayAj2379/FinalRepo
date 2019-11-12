@@ -21,9 +21,15 @@ namespace StudentApplication.Controllers
             {
                 return RedirectToAction("Login", "Login");
             }
+            if(studentAppLogic.CheckLecturerID(lecturerID))
+            {
+                List<LecturerVM> lecturerDetails = studentAppLogic.GetTeacherDetails(lecturerID);
+                return View(lecturerDetails);
+            }
 
-            List<LecturerVM> lecturerDetails = studentAppLogic.GetTeacherDetails(lecturerID);
-            return View(lecturerDetails);
+            ViewBag.Message("Invaid ID");
+            return Json(ViewBag.Message, JsonRequestBehavior.AllowGet);
+
         }
 
         [HttpGet]
