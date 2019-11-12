@@ -104,7 +104,7 @@ namespace StudentApplication.DAL
                         courseId = sqlDataReader["CourseID"].ToString(),
                         courseName = sqlDataReader["CourseName"].ToString(),
                         lecturerId = sqlDataReader["LecturerID"].ToString(),
-                        departmentId = sqlDataReader["LecturerID"].ToString(),
+                        departmentId = sqlDataReader["DepartmentID"].ToString(),
                         semesterId = sqlDataReader["SemesterID"].ToString()                      
                     });
                 }

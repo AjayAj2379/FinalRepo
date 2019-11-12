@@ -1,5 +1,6 @@
 ﻿using StudentApplication.DAL;
 using StudentApplication.Model;
+
 using StudentApplication.Models;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,7 +31,8 @@ namespace StudentApplication.BL
                     studentEmail = student.studentEmail,
                     studentGender = student.studentGender,
                     dateofBirth = student.dateofBirth,
-                    departmentName = department.departmentName
+                    departmentName = department.departmentName,
+                    depatmentID = department.departmentId
                 }
                 ).ToList();
           
@@ -43,10 +45,8 @@ namespace StudentApplication.BL
             gradeDetails.studentId.Equals(studentID)
             );
 
-            
-            var semesterList = studentDataService.GetSemesterData().Where(
-                semDetails => semDetails.semesterId.Equals(gradeList.Select(s => s.semesterId))
-                );
+
+            var semesterList = studentDataService.GetSemesterData();
           
 
             var result = gradeList.Join(
@@ -73,7 +73,9 @@ namespace StudentApplication.BL
            ).Select(course => new CourseVM {
                courseId = course.courseId,
                courseName = course.courseName,
-               semesterId = course.semesterId
+               semesterId = course.semesterId,
+               departmentId = course.departmentId
+               
            }).ToList();
      
             return courseList;
@@ -87,7 +89,9 @@ namespace StudentApplication.BL
            {
                courseId = course.courseId,
                courseName = course.courseName,
-               semesterId = course.semesterId
+               semesterId = course.semesterId,
+               departmentId= course.departmentId,
+               
            }).ToList();
 
             return courseList;
@@ -207,6 +211,29 @@ namespace StudentApplication.BL
                 ).ToList();
 
             return deptData;
+        }
+        public List<DepartmentVM> GetAllDepartmentDetails()
+        {
+            List<DepartmentVM> deptDetails = studentDataService.GetDepartmentData().Select(department => new DepartmentVM
+            {
+                departmentId=department.departmentId,
+                departmentName=department.departmentName,
+                departmentHead=department.departmentHead
+
+            }
+                ).ToList();
+            return deptDetails;
+        }
+
+        public List<SemesterVM> GetAllSemesterDetails()
+        {
+            List<SemesterVM> semeterDetails=studentDataService.GetSemesterData().Select(semester=> new SemesterVM
+            {
+                semesterId=semester.semesterId,
+                semesterName=semester.semesterName,
+                semesterMontYear=semester.semesterMontYear
+            }).ToList();
+            return semeterDetails;
         }
 
        

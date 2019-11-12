@@ -1,4 +1,6 @@
-﻿using System;
+﻿using StudentApplication.BL;
+using StudentApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,26 +8,31 @@ using System.Web.Mvc;
 
 namespace StudentApplication.Controllers
 {
+
     public class TeacherController : Controller
     {
-       [HttpGet]
-       
-       public ActionResult GetTeacherDetails()
-        {
+        StudentAppLogic studentAppLogic = new StudentAppLogic();
 
-            return View();
+        [HttpGet]
+       
+       public ActionResult GetTeacherDetails(string lecturerID)
+        {
+           List<LecturerVM> lecturerDetails = studentAppLogic.GetTeacherDetails(lecturerID);
+            return View(lecturerDetails);
         }
 
         [HttpGet]
 
-        public ActionResult CourseDetailsforTeacher()
+        public ActionResult CourseDetailsforTeacher(string lecturerID)
         {
-            return View();
+            List<CourseVM> courseDetails = studentAppLogic.GetTeacherCourses(lecturerID);
+            return View(courseDetails);
         }
 
-        public ActionResult DeptDetailsforTeacher()
+        public ActionResult DeptDetailsforTeacher(string deptID)
         {
-            return View();
+            List<DepartmentVM> departmentDetails = studentAppLogic.GetDepartmentDetails(deptID);
+            return View(departmentDetails);
         }
     }
 }

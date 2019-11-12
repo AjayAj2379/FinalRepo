@@ -58,6 +58,7 @@
     <Compile Include="ViewModels\GradeVM.cs" />
     <Compile Include="ViewModels\LecturerVM.cs" />
     <Compile Include="ViewModels\LibraryVM.cs" />
+    <Compile Include="ViewModels\SemesterVM.cs" />
     <Compile Include="ViewModels\StudentVM.cs" />
   </ItemGroup>
   <ItemGroup>

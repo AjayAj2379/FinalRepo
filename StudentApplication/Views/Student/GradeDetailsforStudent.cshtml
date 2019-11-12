@@ -1,4 +1,4 @@
-﻿@model StudentApplication.Models.GradeVM
+﻿@model IEnumerable<StudentApplication.Models.GradeVM>
 
 @{
     Layout = null;
@@ -16,42 +16,51 @@
     <title>GradeDetailsforStudent</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-5">
         <div class="jumbotron">
             <div class="text-center">
-                <p style="font-size:20px"><b>You are currently viewing the Department details</b></p>
+                <p><b style="font-size:20px">You are currently viewing the Grade Details of 7th and 8th Semester</b></p>
             </div>
-
-            <table class="table col-md-4 borderless" align="center">
-
-                <tbody>
+            <br>
+            <table class="table  table-hover borderless">
+                <thead class="thead-dark">
                     <tr>
-                        <td><b><span>StudentID</span></b></td>
-                        <td><b>@Model.studentId</b></td>
-                    </tr>
-                  
-                    <tr>
-                        <td><b><span>Semester Name</span></b></td>
-                        <td><b>@Model.semesterId</b></td>
-                    </tr>
-                    <tr>
-                        <td><b><span>  </span></b></td>
-                        <td><b>@Model.grade</b></td>
-                    </tr>
-                    @*<tr>
-                        <td><b><span>Staff Count</span></b></td>
-                        <td><b>@Model.staffCount</b></td>
-                    </tr>*@
+                        <th><b>Semester Name</b></th>
+                        <th><b>Year</b></th>
 
-                </tbody>
+                        <th><b>Grade</b></th>
+
+                        <th><b>Details</b></th>
+
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+            {
+                    <tbody class="table-info">
+                        <tr>
+                            <td><b>@item.semesterName</b></td>
+                            <td><b>@item.semesterMontYear</b></td>
+                            <td><b>@item.grade</b></td>
+                            <td><a href=""><b>Library Details</b></a></td>
+
+                        </tr>
+
+                    </tbody>
+
+
+
+                }
+
             </table>
 
-
         </div>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+    </div> 
+
+
+
+  
+ 
+   
 </body>
 </html>

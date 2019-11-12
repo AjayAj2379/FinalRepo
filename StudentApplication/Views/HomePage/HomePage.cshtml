@@ -93,6 +93,7 @@
 <script>
     $(document).ready(function () {
 
+        // Student
         $("#studentinput").click(function () {           
             var val = $("#studentvalue").val();
             console.log(val)
@@ -114,6 +115,30 @@
                     console.log("error")
                 }
                 
+            })
+        });
+
+        //Teacher
+
+        $("#teacherinput").click(function () {
+            var val = $("#teachervalue").val();
+            console.log(val)
+
+            debugger;
+            $.ajax({
+                type: 'GET',
+                url: "/Teacher/GetTeacherDetails",
+                data: { lecturerID: val },
+                success: function (data) {
+                    console.log("success");
+                    console.log(data);
+                    location.href = '/Teacher/GetTeacherDetails?lecturerID=' + val;
+
+                },
+                failure: function (data) {
+                    console.log("error")
+                }
+
             })
         });
     });
