@@ -22,8 +22,15 @@ namespace StudentApplication.Controllers
             {
                 return RedirectToAction("Login", "Login");
             }
-            List<StudentVM> studentList = studentAppLogic.GetStudentData(stdID);
-            return View(studentList);
+            if(studentAppLogic.CheckStudentID(stdID))
+            {
+                List<StudentVM> studentList = studentAppLogic.GetStudentData(stdID);
+                return View(studentList);
+            }
+
+            ViewBag.Message = "Invalid Id";
+            return Json(ViewBag.Message, JsonRequestBehavior.AllowGet);
+           
         }
 
         /// <summary>
