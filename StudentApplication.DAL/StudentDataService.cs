@@ -17,6 +17,12 @@ namespace StudentApplication.DAL
         private static readonly log4net.ILog log =
          log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        /// <summary>
+        /// Check whether the given studentID is present in the Student Table
+        /// </summary>
+        /// <param name="studentID">Id of a student</param>
+        /// <returns>True or False</returns>
+        /// <exception cref="SqlException">Handles sql exceptions</exception>
         public bool CheckStudentID(string studentID)
         {
             try
@@ -49,6 +55,12 @@ namespace StudentApplication.DAL
 
         }
 
+        /// <summary>
+        /// Returns details of a particular student
+        /// </summary>
+        /// <param name="studentID">Id of a student</param>
+        /// <returns>Generic list of type Student Model</returns>
+        /// <exception cref="SqlException">Handles sql exceptions</exception>
         public List<StudentModel> GetStudentData(string studentID)
         {
             List<StudentModel> studentModel = new List<StudentModel>();
@@ -89,6 +101,11 @@ namespace StudentApplication.DAL
             return studentModel;
         }
 
+        /// <summary>
+        /// Returns the details of all Students
+        /// </summary>
+        /// <returns>Generic list of type Student Model</returns>
+        /// <exception cref="SqlException">Handles sql exceptions</exception>
         public List<StudentModel> GetStudents()
         {
             List<StudentModel> studentModel = new List<StudentModel>();
@@ -131,6 +148,11 @@ namespace StudentApplication.DAL
             return studentModel;
         }
 
+        /// <summary>
+        /// Returns the details of all departments
+        /// </summary>
+        /// <returns>Generic list of type Department Model</returns>
+        /// <exception cref="SqlException">Handles sql exceptions</exception>
         public List<DepartmentModel> GetDepartmentData()
         {
             List<DepartmentModel> departmentModel = new List<DepartmentModel>();
@@ -168,6 +190,11 @@ namespace StudentApplication.DAL
             return departmentModel;
         }
 
+        /// <summary>
+        /// Returns the details of all Courses
+        /// </summary>
+        /// <returns>Generic list of type Course Model</returns>
+        /// <exception cref="SqlException">Handles sql exceptions</exception>
         public List<CourseModel> GetCourseData()
         {
             List<CourseModel> courseModel = new List<CourseModel>();
@@ -204,6 +231,12 @@ namespace StudentApplication.DAL
             }
             return courseModel;
         }
+
+        /// <summary>
+        /// Returns the details of all grades
+        /// </summary>
+        /// <returns>Generic list of type Grade Model</returns>
+        /// <exception cref="SqlException">Handles sql exceptions</exception>
         public List<GradeModel> GetGradeData()
         {
             List<GradeModel> gradeModel = new List<GradeModel>();
@@ -240,6 +273,11 @@ namespace StudentApplication.DAL
             return gradeModel;
         }
 
+        /// <summary>
+        /// Returns the details of all Semesters
+        /// </summary>
+        /// <returns>Generic list of type Semester Model</returns>
+        /// <exception cref="SqlException">Handles sql exceptions</exception>
         public List<SemesterModel> GetSemesterData()
         {
             List<SemesterModel> semesterModel = new List<SemesterModel>();
@@ -275,6 +313,13 @@ namespace StudentApplication.DAL
 
             return semesterModel;
         }
+
+        /// <summary>
+        /// Check whether the given lecturerID is present in the Student Table
+        /// </summary>
+        /// <param name="studentID">Id of a lecturer</param>
+        /// <returns>True or False</returns>
+        /// <exception cref="SqlException">Handles sql exceptions</exception>
         public bool CheckLecturerID(string lecturerID)
         {
             try
@@ -306,6 +351,11 @@ namespace StudentApplication.DAL
             }
         }
 
+        /// <summary>
+        /// Returns the details of all Lecturers
+        /// </summary>
+        /// <returns>Generic list of type Lecturer Model</returns>
+        /// <exception cref="SqlException">Handles sql exceptions</exception>
         public List<LecturerModel> GetLecturerData()
         {
             List<LecturerModel> lecturerModel = new List<LecturerModel>();
@@ -343,6 +393,12 @@ namespace StudentApplication.DAL
             return lecturerModel;
         }
 
+
+        /// <summary>
+        /// Returns the library details
+        /// </summary>
+        /// <returns>Generic list of type Library Model</returns>
+        /// <exception cref="SqlException">Handles sql exceptions</exception>
         public List<LibraryModel> GetLibraryData()
         {
             List<LibraryModel> libraryModel = new List<LibraryModel>();
