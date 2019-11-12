@@ -209,7 +209,14 @@ namespace StudentApplication.BL
             return deptData;
         }
 
-       
+       public bool CheckStudentID(string studentID)
+        {
+            return studentDataService.CheckStudentID(studentID);
+        }
+        public bool CheckLecturerID(string lecturerID)
+        {
+            return studentDataService.CheckLecturerID(lecturerID);
+        }
 
     }
 }

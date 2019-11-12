@@ -13,8 +13,13 @@ namespace StudentApplication.Controllers
         [HttpGet]
         public ActionResult StudentDetails(string stdID)
         {
-            List<StudentVM> studentList = studentAppLogic.GetStudentData(stdID);
-            return View(studentList);
+            if (studentAppLogic.CheckStudentID(stdID))
+            {
+                List<StudentVM> studentList = studentAppLogic.GetStudentData(stdID);
+                return View(studentList);
+            }
+            ViewBag.Message = "InvalidID";
+            return Json(ViewBag.Message, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public ActionResult CourseDetailsforStudent()
