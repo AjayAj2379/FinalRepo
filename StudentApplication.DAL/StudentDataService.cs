@@ -1,4 +1,5 @@
-﻿using StudentApplication.Model;
+﻿using StudentApplication.DAL.Interfaces;
+using StudentApplication.Model;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -6,246 +7,376 @@ using System.Data.SqlClient;
 
 namespace StudentApplication.DAL
 {
-    public class StudentDataService
+    /// <summary>
+    /// Implements IDatabaseOperations interface
+    /// </summary>
+    public class StudentDataService : IDatabaseOperations
     {
         SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString);
 
+        private static readonly log4net.ILog log =
+         log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public bool CheckStudentID(string studentID)
         {
-            sqlConnection.Open();
-            SqlDataReader sqlDataReader = null;
-            string query = "Select * from Student_Table where StudentID ='" + studentID + "'";
-            using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+            try
             {
-                sqlDataReader = sqlCommand.ExecuteReader();
-                if (sqlDataReader.HasRows)
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = null;
+                string query = "Select * from Student_Table where StudentID ='" + studentID + "'";
+                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
-                    sqlConnection.Close();
-                    return true;
+                    sqlDataReader = sqlCommand.ExecuteReader();
+                    if (sqlDataReader.HasRows)
+                    {
+                        return true;
+                    }
+                    return false;
                 }
+            }
+            catch (SqlException sqlexception)
+            {
+                log.Info("\n------------Sql Exception------");
+                log.Error(sqlexception.ToString());
+                bool exception = Convert.ToBoolean(sqlexception);
+                return exception;
+
+            }
+            finally
+            {
                 sqlConnection.Close();
-                return false;
             }
 
         }
 
         public List<StudentModel> GetStudentData(string studentID)
         {
-
-            sqlConnection.Open();
-            SqlDataReader sqlDataReader = null;
             List<StudentModel> studentModel = new List<StudentModel>();
-            string query = "Select * from Student_Table where StudentID ='" + studentID + "'";
-            using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+            try
             {
-                sqlDataReader = sqlCommand.ExecuteReader();
-                while (sqlDataReader.Read())
-                {
-                    studentModel.Add(new StudentModel
-                    {
-                        studentID = sqlDataReader["StudentID"].ToString(),
-                        studentName = sqlDataReader["StudentName"].ToString(),
-                        studentEmail = sqlDataReader["Email"].ToString(),
-                        studentCity = sqlDataReader["City"].ToString(),
-                        dateofBirth = sqlDataReader["DateofBirth"].ToString(),
-                        studentGender = sqlDataReader["Gender"].ToString(),
-                        departmentID = sqlDataReader["DepartmentId"].ToString(),
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = null;
 
-                    });
+                string query = "Select * from Student_Table where StudentID ='" + studentID + "'";
+                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                {
+                    sqlDataReader = sqlCommand.ExecuteReader();
+                    while (sqlDataReader.Read())
+                    {
+                        studentModel.Add(new StudentModel
+                        {
+                            studentID = sqlDataReader["StudentID"].ToString(),
+                            studentName = sqlDataReader["StudentName"].ToString(),
+                            studentEmail = sqlDataReader["Email"].ToString(),
+                            studentCity = sqlDataReader["City"].ToString(),
+                            dateofBirth = sqlDataReader["DateofBirth"].ToString(),
+                            studentGender = sqlDataReader["Gender"].ToString(),
+                            departmentID = sqlDataReader["DepartmentId"].ToString(),
+
+                        });
+                    }
                 }
             }
-            sqlConnection.Close();
+            catch (SqlException sqlexception)
+            {
+                log.Info("\n------------Sql Exception------\n");
+                log.Error(sqlexception.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
             return studentModel;
         }
 
         public List<StudentModel> GetStudents()
         {
-            sqlConnection.Open();
-            SqlDataReader sqlDataReader = null;
             List<StudentModel> studentModel = new List<StudentModel>();
-            string query = "Select * from Student_Table";
-            using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+            try
             {
-                sqlDataReader = sqlCommand.ExecuteReader();
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = null;
 
-                while (sqlDataReader.Read())
+                string query = "Select * from Student_Table";
+                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
-                    studentModel.Add(new StudentModel
-                    {
-                        studentID = sqlDataReader["StudentID"].ToString(),
-                        studentName = sqlDataReader["StudentName"].ToString(),
-                        studentEmail = sqlDataReader["Email"].ToString(),
-                        studentCity = sqlDataReader["City"].ToString(),
-                        dateofBirth = sqlDataReader["DateofBirth"].ToString(),
-                        studentGender = sqlDataReader["Gender"].ToString(),
-                        departmentID = sqlDataReader["DepartmentId"].ToString(),
+                    sqlDataReader = sqlCommand.ExecuteReader();
 
-                    });
+                    while (sqlDataReader.Read())
+                    {
+                        studentModel.Add(new StudentModel
+                        {
+                            studentID = sqlDataReader["StudentID"].ToString(),
+                            studentName = sqlDataReader["StudentName"].ToString(),
+                            studentEmail = sqlDataReader["Email"].ToString(),
+                            studentCity = sqlDataReader["City"].ToString(),
+                            dateofBirth = sqlDataReader["DateofBirth"].ToString(),
+                            studentGender = sqlDataReader["Gender"].ToString(),
+                            departmentID = sqlDataReader["DepartmentId"].ToString(),
+
+                        });
+                    }
                 }
+
             }
-            sqlConnection.Close();
+            catch (SqlException sqlexception)
+            {
+                log.Info("\n------------Sql Exception------\n");
+                log.Error(sqlexception.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
             return studentModel;
         }
+
         public List<DepartmentModel> GetDepartmentData()
         {
-            sqlConnection.Open();
-            SqlDataReader sqlDataReader = null;
             List<DepartmentModel> departmentModel = new List<DepartmentModel>();
-            string query = "Select * from Department_Table";
-            using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
-            {
-                sqlDataReader = sqlCommand.ExecuteReader();
 
-                while (sqlDataReader.Read())
+            try
+            {
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = null;
+
+                string query = "Select * from Department_Table";
+                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
-                    departmentModel.Add(new DepartmentModel
+                    sqlDataReader = sqlCommand.ExecuteReader();
+
+                    while (sqlDataReader.Read())
                     {
-                        departmentId = sqlDataReader["DepartmentId"].ToString(),
-                        departmentHead = sqlDataReader["DepartmentHead"].ToString(),
-                        departmentName = sqlDataReader["DepartmentName"].ToString()
-                    });
+                        departmentModel.Add(new DepartmentModel
+                        {
+                            departmentId = sqlDataReader["DepartmentId"].ToString(),
+                            departmentHead = sqlDataReader["DepartmentHead"].ToString(),
+                            departmentName = sqlDataReader["DepartmentName"].ToString()
+                        });
+                    }
                 }
             }
-            sqlConnection.Close();
+            catch (SqlException sqlexception)
+            {
+                log.Info("\n------------Sql Exception------\n");
+                log.Error(sqlexception.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
             return departmentModel;
         }
 
         public List<CourseModel> GetCourseData()
         {
-            sqlConnection.Open();
-            SqlDataReader sqlDataReader = null;
             List<CourseModel> courseModel = new List<CourseModel>();
-            string query = "Select * from Course_Table";
-            using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+            try
             {
-                sqlDataReader = sqlCommand.ExecuteReader();
-                while (sqlDataReader.Read())
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = null;
+
+                string query = "Select * from Course_Table";
+                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
-                    courseModel.Add(new CourseModel
+                    sqlDataReader = sqlCommand.ExecuteReader();
+                    while (sqlDataReader.Read())
                     {
-                        courseId = sqlDataReader["CourseID"].ToString(),
-                        courseName = sqlDataReader["CourseName"].ToString(),
-                        lecturerId = sqlDataReader["LecturerID"].ToString(),
-                        departmentId = sqlDataReader["LecturerID"].ToString(),
-                        semesterId = sqlDataReader["SemesterID"].ToString()
-                    });
+                        courseModel.Add(new CourseModel
+                        {
+                            courseId = sqlDataReader["CourseID"].ToString(),
+                            courseName = sqlDataReader["CourseName"].ToString(),
+                            lecturerId = sqlDataReader["LecturerID"].ToString(),
+                            departmentId = sqlDataReader["LecturerID"].ToString(),
+                            semesterId = sqlDataReader["SemesterID"].ToString()
+                        });
+                    }
                 }
             }
-            sqlConnection.Close();
+            catch (SqlException sqlexception)
+            {
+                log.Info("\n------------Sql Exception------\n");
+                log.Error(sqlexception.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
             return courseModel;
         }
         public List<GradeModel> GetGradeData()
         {
-            sqlConnection.Open();
-            SqlDataReader sqlDataReader = null;
             List<GradeModel> gradeModel = new List<GradeModel>();
-            string query = "Select * from Grade_Table";
-            using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+            try
             {
-                sqlDataReader = sqlCommand.ExecuteReader();
-                while (sqlDataReader.Read())
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = null;
+
+                string query = "Select * from Grade_Table";
+                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
-                    gradeModel.Add(new GradeModel
+                    sqlDataReader = sqlCommand.ExecuteReader();
+                    while (sqlDataReader.Read())
                     {
-                        grade = sqlDataReader["Grade"].ToString(),
-                        semesterId = sqlDataReader["SemesterID"].ToString(),
-                        studentId = sqlDataReader["StudentID"].ToString()
-                    });
+                        gradeModel.Add(new GradeModel
+                        {
+                            grade = sqlDataReader["Grade"].ToString(),
+                            semesterId = sqlDataReader["SemesterID"].ToString(),
+                            studentId = sqlDataReader["StudentID"].ToString()
+                        });
+                    }
                 }
             }
-            sqlConnection.Close();
+            catch (SqlException sqlexception)
+            {
+                log.Info("\n------------Sql Exception------\n");
+                log.Error(sqlexception.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
             return gradeModel;
         }
 
-
-
         public List<SemesterModel> GetSemesterData()
         {
-            sqlConnection.Open();
-            SqlDataReader sqlDataReader = null;
             List<SemesterModel> semesterModel = new List<SemesterModel>();
-            string query = "Select * from Semester_Table";
-            using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+            try
             {
-                sqlDataReader = sqlCommand.ExecuteReader();
-                while (sqlDataReader.Read())
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = null;
+
+                string query = "Select * from Semester_Table";
+                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
-                    semesterModel.Add(new SemesterModel
+                    sqlDataReader = sqlCommand.ExecuteReader();
+                    while (sqlDataReader.Read())
                     {
-                        semesterId = sqlDataReader["SemesterID"].ToString(),
-                        semesterName = sqlDataReader["SemesterNumber"].ToString(),
-                        semesterMontYear = sqlDataReader["SemesterMonth_Year"].ToString()
-                    });
+                        semesterModel.Add(new SemesterModel
+                        {
+                            semesterId = sqlDataReader["SemesterID"].ToString(),
+                            semesterName = sqlDataReader["SemesterNumber"].ToString(),
+                            semesterMontYear = sqlDataReader["SemesterMonth_Year"].ToString()
+                        });
+                    }
                 }
             }
-            sqlConnection.Close();
+            catch (SqlException sqlexception)
+            {
+                log.Info("\n------------Sql Exception------\n");
+                log.Error(sqlexception.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
             return semesterModel;
         }
         public bool CheckLecturerID(string lecturerID)
         {
-            sqlConnection.Open();
-            SqlDataReader sqlDataReader = null;
-            string query = "SELECT * from Lecturer_Table  where LecturerId ='" + lecturerID + "'";
-            using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+            try
             {
-                sqlDataReader = sqlDataReader = sqlCommand.ExecuteReader();
-                if (sqlDataReader.HasRows)
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = null;
+                string query = "SELECT * from Lecturer_Table  where LecturerId ='" + lecturerID + "'";
+                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
-                    sqlConnection.Close();
-                    return true;
+                    sqlDataReader = sqlDataReader = sqlCommand.ExecuteReader();
+                    if (sqlDataReader.HasRows)
+                    {
+                        return true;
+                    }
+                    return false;
                 }
-                sqlConnection.Close();
-                return false;
             }
+            catch (SqlException sqlexception)
+            {
+                log.Info("\n------------Sql Exception------");
+                log.Error(sqlexception.ToString());
+                bool exception = Convert.ToBoolean(sqlexception);
+                return exception;
 
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
         }
 
         public List<LecturerModel> GetLecturerData()
         {
-            sqlConnection.Open();
-            SqlDataReader sqlDataReader = null;
             List<LecturerModel> lecturerModel = new List<LecturerModel>();
-            string query = "Select * from Lecturer_Table";
-            using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+            try
             {
-                sqlDataReader = sqlCommand.ExecuteReader();
-                while (sqlDataReader.Read())
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = null;
+
+                string query = "Select * from Lecturer_Table";
+                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
-                    lecturerModel.Add(new LecturerModel
+                    sqlDataReader = sqlCommand.ExecuteReader();
+                    while (sqlDataReader.Read())
                     {
-                        lecturerId = sqlDataReader["LecturerId"].ToString(),
-                        lecturerName = sqlDataReader["LecturerName"].ToString(),
-                        email = sqlDataReader["Email"].ToString(),
-                        phoneNumber = sqlDataReader["PhoneNumber"].ToString(),
-                        departmentId = sqlDataReader["DepartmentID"].ToString()
-                    });
+                        lecturerModel.Add(new LecturerModel
+                        {
+                            lecturerId = sqlDataReader["LecturerId"].ToString(),
+                            lecturerName = sqlDataReader["LecturerName"].ToString(),
+                            email = sqlDataReader["Email"].ToString(),
+                            phoneNumber = sqlDataReader["PhoneNumber"].ToString(),
+                            departmentId = sqlDataReader["DepartmentID"].ToString()
+                        });
+                    }
                 }
             }
-            sqlConnection.Close();
+            catch (SqlException sqlexception)
+            {
+                log.Info("\n------------Sql Exception------\n");
+                log.Error(sqlexception.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
             return lecturerModel;
         }
 
         public List<LibraryModel> GetLibraryData()
         {
-            sqlConnection.Open();
-            SqlDataReader sqlDataReader = null;
             List<LibraryModel> libraryModel = new List<LibraryModel>();
-            string query = "Select * from Library_Table";
-            using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+            try
             {
-                sqlDataReader = sqlCommand.ExecuteReader();
-                while (sqlDataReader.Read())
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = null;
+
+                string query = "Select * from Library_Table";
+                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
-                    libraryModel.Add(new LibraryModel
+                    sqlDataReader = sqlCommand.ExecuteReader();
+                    while (sqlDataReader.Read())
                     {
-                        courseId = sqlDataReader["CourseID"].ToString(),
-                        authorName = sqlDataReader["AuthorName"].ToString(),
-                        rackNumber =Convert.ToInt32(sqlDataReader["RackNumber"]),
-                        yearOfPublishing = Convert.ToInt64(sqlDataReader["YearofPublising"])
-                    });
+                        libraryModel.Add(new LibraryModel
+                        {
+                            courseId = sqlDataReader["CourseID"].ToString(),
+                            authorName = sqlDataReader["AuthorName"].ToString(),
+                            rackNumber = Convert.ToInt32(sqlDataReader["RackNumber"]),
+                            yearOfPublishing = Convert.ToInt64(sqlDataReader["YearofPublising"])
+                        });
+                    }
                 }
             }
-            sqlConnection.Close();
+            catch (SqlException sqlexception)
+            {
+                log.Info("\n------------Sql Exception------\n");
+                log.Error(sqlexception.ToString());
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
             return libraryModel;
         }
     }
