@@ -2,18 +2,22 @@
 using StudentApplication.Model;
 
 using StudentApplication.Models;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace StudentApplication.BL
 {
-    
- public class StudentAppLogic
+
+    public class StudentAppLogic
     {
         StudentDataService studentDataService = new StudentDataService();
 
-        public List<StudentVM> GetStudentData (string studentID)
+        /// <summary>
+        /// Gets list containing details of a particular student
+        /// </summary>
+        /// <param name="studentID">ID of a particular Student</param>
+        /// <returns>Generic list of type Student View model</returns>
+        public List<StudentVM> GetStudentData(string studentID)
         {
             StudentVM studentVM = new StudentVM();
             List<StudentModel> studentList = studentDataService.GetStudentData(studentID);
@@ -35,19 +39,21 @@ namespace StudentApplication.BL
                     depatmentID = department.departmentId
                 }
                 ).ToList();
-          
+
             return result;
         }
 
+        /// <summary>
+        /// Returns grade and Semester details of a particular student
+        /// </summary>
+        /// <param name="studentID">ID of a particular Student</param>
+        /// <returns>Generic list of type Grade View model</returns>
         public List<GradeVM> GetSemGrades(string studentID)
         {
             var gradeList = studentDataService.GetGradeData().Where(gradeDetails =>
             gradeDetails.studentId.Equals(studentID)
             );
-
-
             var semesterList = studentDataService.GetSemesterData();
-          
 
             var result = gradeList.Join(
                 semesterList,
@@ -61,26 +67,36 @@ namespace StudentApplication.BL
                     semesterMontYear = semester.semesterMontYear
                 }
                 ).ToList();
-                 
-            
+
             return result;
         }
 
+        /// <summary>
+        /// Returns Course details of a particular Department
+        /// </summary>
+        /// <param name="departmentID">ID of a particular Department</param>
+        /// <returns>Generic list of type Course View model</returns>
         public List<CourseVM> GetDepartmentCourses(string departmentID)
         {
             var courseList = studentDataService.GetCourseData().Where(course =>
            course.departmentId.Equals(departmentID)
-           ).Select(course => new CourseVM {
+           ).Select(course => new CourseVM
+           {
                courseId = course.courseId,
                courseName = course.courseName,
                semesterId = course.semesterId,
                departmentId = course.departmentId
-               
+
            }).ToList();
-     
+
             return courseList;
         }
 
+        /// <summary>
+        /// Returns details of the courses handled by particular lecturer
+        /// </summary>
+        /// <param name="lecturerID">ID of a particular lecturer</param>
+        /// <returns>Generic list of type Course View model</returns>
         public List<CourseVM> GetTeacherCourses(string lecturerID)
         {
             var courseList = studentDataService.GetCourseData().Where(course =>
@@ -90,13 +106,18 @@ namespace StudentApplication.BL
                courseId = course.courseId,
                courseName = course.courseName,
                semesterId = course.semesterId,
-               departmentId= course.departmentId,
-               
+               departmentId = course.departmentId,
+
            }).ToList();
 
             return courseList;
         }
 
+        /// <summary>
+        /// Returns library details of a particular Course
+        /// </summary>
+        /// <param name="courseId">ID of a particular course</param>
+        /// <returns>Generic list of type Library View model</returns>
         public List<LibraryVM> GetLibraryDetails(string courseId)
         {
             var libraryDetails = studentDataService.GetLibraryData().Where(library =>
@@ -109,7 +130,8 @@ namespace StudentApplication.BL
                 courseDetails,
                 library => library.courseId,
                 course => course.courseId,
-                (library,course) => new LibraryVM{
+                (library, course) => new LibraryVM
+                {
                     courseId = library.courseId,
                     courseName = course.courseName,
                     authorName = library.authorName,
@@ -148,6 +170,11 @@ namespace StudentApplication.BL
 
         //}
 
+        /// <summary>
+        /// Returns details of a particular lecturer
+        /// </summary>
+        /// <param name="lecturerId">ID of a particular lecturer</param>
+        /// <returns>Generic list of type Lecturer View model</returns>
         public List<LecturerVM> GetTeacherDetails(string lecturerId)
         {
             var lecturerDetails = studentDataService.GetLecturerData().Where(teacher =>
@@ -159,7 +186,7 @@ namespace StudentApplication.BL
                 dept,
                 lecturer => lecturer.departmentId,
                 department => department.departmentId,
-                (lecturer,department) => new LecturerVM
+                (lecturer, department) => new LecturerVM
                 {
                     lecturerId = lecturer.lecturerId,
                     lecturerName = lecturer.lecturerName,
@@ -197,49 +224,74 @@ namespace StudentApplication.BL
         //    return list;
         //}
 
+        /// <summary>
+        /// Returns details of a particular department
+        /// </summary>
+        /// <param name="deptID">ID of a particular department</param>
+        /// <returns>Generic list of type Department View model</returns>
         public List<DepartmentVM> GetDepartmentDetails(string deptID)
         {
-            var deptData = studentDataService.GetDepartmentData().Where(dept=>
+            var deptData = studentDataService.GetDepartmentData().Where(dept =>
             dept.departmentId.Equals(deptID))
             .Select(department => new DepartmentVM
             {
                 departmentId = department.departmentId,
-                departmentName= department.departmentName,
-                departmentHead= department.departmentHead
+                departmentName = department.departmentName,
+                departmentHead = department.departmentHead
             }
-                
+
                 ).ToList();
 
             return deptData;
         }
+
+        /// <summary>
+        /// Returns the details of all Departments
+        /// </summary>
+        /// <returns>Generic list of type Department View model</returns>
         public List<DepartmentVM> GetAllDepartmentDetails()
         {
             List<DepartmentVM> deptDetails = studentDataService.GetDepartmentData().Select(department => new DepartmentVM
             {
-                departmentId=department.departmentId,
-                departmentName=department.departmentName,
-                departmentHead=department.departmentHead
+                departmentId = department.departmentId,
+                departmentName = department.departmentName,
+                departmentHead = department.departmentHead
 
             }
                 ).ToList();
             return deptDetails;
         }
 
+        /// <summary>
+        /// Returns the details of all Semesters
+        /// </summary>
+        /// <returns>Generic list of type Semester View model</returns>
         public List<SemesterVM> GetAllSemesterDetails()
         {
-            List<SemesterVM> semeterDetails=studentDataService.GetSemesterData().Select(semester=> new SemesterVM
+            List<SemesterVM> semeterDetails = studentDataService.GetSemesterData().Select(semester => new SemesterVM
             {
-                semesterId=semester.semesterId,
-                semesterName=semester.semesterName,
-                semesterMontYear=semester.semesterMontYear
+                semesterId = semester.semesterId,
+                semesterName = semester.semesterName,
+                semesterMontYear = semester.semesterMontYear
             }).ToList();
             return semeterDetails;
         }
 
-       public bool CheckStudentID(string studentID)
+        /// <summary>
+        /// Returns whether the given studentID is existing or not
+        /// </summary>
+        /// <param name="studentID">Id of a particular student</param>
+        /// <returns>True or False</returns>
+        public bool CheckStudentID(string studentID)
         {
             return studentDataService.CheckStudentID(studentID);
         }
+
+        /// <summary>
+        /// Returns whether the given lecturerID is existing or not
+        /// </summary>
+        /// <param name="lecturerID">Id of a particular lecturer</param>
+        /// <returns>True or False</returns>
         public bool CheckLecturerID(string lecturerID)
         {
             return studentDataService.CheckLecturerID(lecturerID);
