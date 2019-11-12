@@ -10,8 +10,15 @@ namespace StudentApplication.Controllers
     {
         StudentAppLogic studentAppLogic = new StudentAppLogic();
 
-        [HttpGet]
-       
+        /// <summary>
+        /// Get Details of a Teacher
+        /// </summary>
+        /// <param name="lecturerID">Lecturer Id</param>
+        /// <returns>
+        /// Returns Lecturer Details List
+        /// </returns>
+        
+        [HttpGet]               
        public ActionResult GetTeacherDetails(string lecturerID)
         {
             if (Session["Username"] == null)
@@ -29,8 +36,15 @@ namespace StudentApplication.Controllers
 
         }
 
-        [HttpGet]
+        /// <summary>
+        /// Get Course details of a Teacher
+        /// </summary>
+        /// <param name="lecturerID">Lecturer Id</param>
+        /// <returns>
+        /// Returns Course Details List of a Teacher
+        /// </returns>     
 
+        [HttpGet]
         public ActionResult CourseDetailsforTeacher(string lecturerID)
         {
             if (Session["Username"] == null)
@@ -41,6 +55,14 @@ namespace StudentApplication.Controllers
             List<CourseVM> courseDetails = studentAppLogic.GetTeacherCourses(lecturerID);
             return View(courseDetails);
         }
+
+        /// <summary>
+        /// Get Department details of a Teacher
+        /// </summary>
+        /// <param name="deptID">Department Id</param>
+        /// <returns>
+        /// Returns Departrment details list of a Teacher
+        /// </returns>
 
         public ActionResult DeptDetailsforTeacher(string deptID)
         {

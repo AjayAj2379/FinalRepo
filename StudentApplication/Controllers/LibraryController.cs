@@ -8,6 +8,13 @@ namespace StudentApplication.Controllers
     public class LibraryController : Controller
     {
         StudentAppLogic studentAppLogic = new StudentAppLogic();
+        /// <summary>
+        /// Get details of a books in a Library
+        /// </summary>
+        /// <param name="courseID">Course Id</param>
+        /// <returns>
+        /// Returns book details list in a Library
+        /// </returns>
 
         public ActionResult GetLibraryDetails(string courseID)
         {

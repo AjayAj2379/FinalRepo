@@ -9,11 +9,13 @@ namespace StudentApplication.Controllers
 {
     public class LoginController : Controller
     {
+        /// <summary>
+        /// Method to Check User details and Login
+        /// </summary>
+        /// <returns></returns>
         // GET: Login
         public ActionResult Login()
         {
-            Session.RemoveAll();
-            Session.Abandon();
             return View();
         }
 
@@ -32,13 +34,15 @@ namespace StudentApplication.Controllers
             }
             return View(loginModel);
         }
-
-        [HttpGet]
+        /// <summary>
+        /// Method to Logout
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Logout()
         {
             Session.RemoveAll();
             Session.Abandon();
-            return RedirectToAction("Login");
+            return RedirectToAction("LoginPage");
         }
 
     }
