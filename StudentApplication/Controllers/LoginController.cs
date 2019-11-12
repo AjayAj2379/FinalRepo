@@ -9,6 +9,10 @@ namespace StudentApplication.Controllers
 {
     public class LoginController : Controller
     {
+        /// <summary>
+        /// Method to Check User details and Login
+        /// </summary>
+        /// <returns></returns>
         // GET: Login
         public ActionResult Login()
         {
@@ -30,7 +34,10 @@ namespace StudentApplication.Controllers
             }
             return View(loginModel);
         }
-
+        /// <summary>
+        /// Method to Logout
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Logout()
         {
             Session.RemoveAll();

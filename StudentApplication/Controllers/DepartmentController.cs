@@ -11,7 +11,12 @@ namespace StudentApplication.Controllers
     public class DepartmentController : Controller
     {
         StudentAppLogic studentAppLogic = new StudentAppLogic();
-
+        /// <summary>
+        /// Get Details of all Department 
+        /// </summary>
+        /// <returns>
+        /// Return Department Details List
+        /// </returns>
         [HttpGet]
         public ActionResult GetDepartmentDetails()
         {
@@ -23,6 +28,13 @@ namespace StudentApplication.Controllers
             return View(deptDetails);
         }
 
+        /// <summary>
+        /// Get Staff Details based on Department
+        /// </summary>
+        /// <param name="deptID">Department Id</param>
+        /// <returns>
+        /// Return Lecturer Details List
+        /// </returns>
         public ActionResult StaffDetailsbyDept(string deptID)
         {
             if (Session["Username"] == null)

@@ -11,6 +11,12 @@ namespace StudentApplication.Controllers
     public class SemesterController : Controller
     {
         StudentAppLogic studentAppLogic = new StudentAppLogic();
+        /// <summary>
+        /// Get Details of a Semester
+        /// </summary>
+        /// <returns>
+        /// Returns Semester details list 
+        /// </returns>
        
         public ActionResult GetSemesterDetails()
         {

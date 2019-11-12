@@ -8,12 +8,13 @@ namespace StudentApplication.Controllers
     public class StudentController : Controller
     {
         StudentAppLogic studentAppLogic = new StudentAppLogic();
-
         /// <summary>
-        /// 
+        /// Get Details of all the Students
         /// </summary>
-        /// <param name="stdID"></param>
-        /// <returns></returns>
+        /// <param name="stdID">Student Id</param>
+        /// <returns>
+        /// Returns Student Details list
+        /// </returns>
 
         [HttpGet]
         public ActionResult StudentDetails(string stdID)
@@ -34,10 +35,12 @@ namespace StudentApplication.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Get Course Details of a particular Student based on Department
         /// </summary>
-        /// <returns></returns>
-        /// 
+        /// <param name="deptId">Department Id</param>
+        /// <returns>
+        /// returns course details of a Student based on department
+        /// </returns>      
 
         [HttpGet]
         public ActionResult CourseDetailsforStudent(string deptId)
@@ -52,10 +55,13 @@ namespace StudentApplication.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Get Department details of a Student
         /// </summary>
-        /// <returns></returns>
-        /// 
+        /// <param name="deptId">Department Id</param>
+        /// <returns>
+        /// Return Department Details list for a Student 
+        /// </returns>
+        
         [HttpGet]
 
         public ActionResult DeptDetailsforStudent(string deptId)
@@ -69,10 +75,13 @@ namespace StudentApplication.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Get Grade Details of a Student 
         /// </summary>
-        /// <returns></returns>
-        /// 
+        /// <param name="studentId">Student Id</param>
+        /// <returns>
+        /// Returns Grade details List for a student
+        /// </returns>
+        
         [HttpGet]
 
         public ActionResult GradeDetailsforStudent(string studentId)

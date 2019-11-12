@@ -13,7 +13,6 @@ namespace StudentApplication.DAL
     public class StudentDataService : IDatabaseOperations
     {
         SqlConnection sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString);
-
         private static readonly log4net.ILog log =
         log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -46,7 +45,6 @@ namespace StudentApplication.DAL
                 log.Error(sqlexception.ToString());
                 bool exception = Convert.ToBoolean(sqlexception);
                 return exception;
-
             }
             finally
             {
@@ -83,7 +81,6 @@ namespace StudentApplication.DAL
                             dateofBirth = sqlDataReader["DateofBirth"].ToString(),
                             studentGender = sqlDataReader["Gender"].ToString(),
                             departmentID = sqlDataReader["DepartmentId"].ToString(),
-
                         });
                     }
                 }
@@ -116,7 +113,6 @@ namespace StudentApplication.DAL
                 using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
                     sqlDataReader = sqlCommand.ExecuteReader();
-
                     while (sqlDataReader.Read())
                     {
                         studentModel.Add(new StudentModel
@@ -128,11 +124,9 @@ namespace StudentApplication.DAL
                             dateofBirth = sqlDataReader["DateofBirth"].ToString(),
                             studentGender = sqlDataReader["Gender"].ToString(),
                             departmentID = sqlDataReader["DepartmentId"].ToString(),
-
                         });
                     }
                 }
-
             }
             catch (SqlException sqlexception)
             {
@@ -154,17 +148,14 @@ namespace StudentApplication.DAL
         public List<DepartmentModel> GetDepartmentData()
         {
             List<DepartmentModel> departmentModel = new List<DepartmentModel>();
-
             try
             {
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = null;
-
                 string query = "Select * from Department_Table";
                 using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
                     sqlDataReader = sqlCommand.ExecuteReader();
-
                     while (sqlDataReader.Read())
                     {
                         departmentModel.Add(new DepartmentModel
@@ -200,7 +191,6 @@ namespace StudentApplication.DAL
             {
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = null;
-
                 string query = "Select * from Course_Table";
                 using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
@@ -242,7 +232,6 @@ namespace StudentApplication.DAL
             {
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = null;
-
                 string query = "Select * from Grade_Table";
                 using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
@@ -283,7 +272,6 @@ namespace StudentApplication.DAL
             {
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = null;
-
                 string query = "Select * from Semester_Table";
                 using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
@@ -361,7 +349,6 @@ namespace StudentApplication.DAL
             {
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = null;
-
                 string query = "Select * from Lecturer_Table";
                 using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
@@ -404,7 +391,6 @@ namespace StudentApplication.DAL
             {
                 sqlConnection.Open();
                 SqlDataReader sqlDataReader = null;
-
                 string query = "Select * from Library_Table";
                 using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {

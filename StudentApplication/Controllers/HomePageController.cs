@@ -6,8 +6,7 @@ namespace StudentApplication.Controllers
 {
     public class HomePageController : Controller
     {
-        StudentAppLogic studentAppLogic = new StudentAppLogic();
-       
+        StudentAppLogic studentAppLogic = new StudentAppLogic();       
         public ActionResult HomePage()
         {
             if (Session["Username"] == null)
