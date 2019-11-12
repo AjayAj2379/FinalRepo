@@ -17,8 +17,13 @@ namespace StudentApplication.Controllers
        
        public ActionResult GetTeacherDetails(string lecturerID)
         {
-           List<LecturerVM> lecturerDetails = studentAppLogic.GetTeacherDetails(lecturerID);
-            return View(lecturerDetails);
+            if (studentAppLogic.CheckLecturerID(lecturerID))
+            {
+                List<LecturerVM> lecturerDetails = studentAppLogic.GetTeacherDetails(lecturerID);
+                return View(lecturerDetails);
+            }
+            ViewBag.Message = "InvalidID";
+            return Json(ViewBag.Message, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
