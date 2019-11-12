@@ -1,6 +1,5 @@
 ﻿using StudentApplication.DAL;
 using StudentApplication.Model;
-
 using StudentApplication.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,9 @@ using System.Linq;
 
 namespace StudentApplication.BL
 {
-
+    /// <summary>
+    /// Contains business logic functions of the application
+    /// </summary>
     public class StudentAppLogic
     {
         private static readonly log4net.ILog log =
