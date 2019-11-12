@@ -42,7 +42,7 @@ namespace StudentApplication.Controllers
         {
             Session.RemoveAll();
             Session.Abandon();
-            return RedirectToAction("LoginPage");
+            return RedirectToAction("Login");
         }
 
     }
