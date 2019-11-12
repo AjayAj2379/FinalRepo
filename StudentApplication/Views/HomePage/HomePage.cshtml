@@ -56,7 +56,7 @@
                             
 
                         </div>
-                        <p id="ErrorStud" style="color:red"><b>Invalid ID</b> </p>
+                        <p id="ErrorStud" style="color:red;margin-left:40px"><b>Invalid ID</b> </p>
 
                     </div>
                     <div class="modal-footer">
@@ -82,7 +82,7 @@
                         <button type="button" class="btn btn-primary" id="teacherinput" style="margin-left:30px">Click</button>
 
                     </div>
-                    <p id="ErrorTech" style="color:red"><b>Invalid ID</b> </p>
+                    <p id="ErrorTech" style="color:red;margin-left:40px"><b>Invalid ID</b> </p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -113,8 +113,9 @@
                 success: function (data) {
                     console.log("success");
                     console.log(data);
-                    if (data == "Invalid ID")
+                    if (data == "Invalid Id")
                     {
+                        console.log("sasassfsfsfsfsfs");
                         $("#ErrorStud").show();
                     }
                     
@@ -146,7 +147,8 @@
                 success: function (data) {
                     console.log("success");
                     console.log(data);
-                    if (data == "Invalid ID") {
+                    if (data == "Invalid Id") {
+                        console.log("sasassfsfsfsfsfs");
                         $("#ErrorTech").show();
                     }
                     else {
